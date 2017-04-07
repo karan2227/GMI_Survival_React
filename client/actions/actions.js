@@ -52,3 +52,16 @@ export function getUsers(url,data=undefined) {
        
     };
 }
+
+export function dispatchToDisplay(user){
+    return {
+        type:'SELECTED_USER',
+        user
+    }
+}
+
+export function selectedUser(user){
+    return (dispatch) => {
+        dispatch(dispatchToDisplay(user));   
+     }
+}

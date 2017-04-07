@@ -17,3 +17,17 @@ export function users(state = [], action){
             return state;
     }
 }
+
+export function selectedUser(state=[],action){
+    switch(action.type){
+        case 'SELECTED_USER':
+
+        var myUser=action.user;
+        var newState=[...state,myUser]
+        console.log(newState);
+        return newState;
+
+        default:
+        return state;
+    }
+}

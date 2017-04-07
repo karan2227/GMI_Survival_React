@@ -8,8 +8,15 @@ import Main from './Main.component';
 const mapStateToProps = (state) => {
     return {
         //state variables which are access using props
+<<<<<<< HEAD
         users: state.users,
         currentSelectedUser:state.selectedUser
+=======
+        users: state.users, 
+        hasErrored: state.dataHasErrored,
+        isLoading: state.dataIsLoading
+        
+>>>>>>> 94a4fe848dde87874c7d8ada9b0f5bbc3e637371
     };
 }
 

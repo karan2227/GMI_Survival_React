@@ -6,7 +6,12 @@ export function dataHasErrored(bool) {
         hasErrored: bool
     };
 }
-
+export function dataIsLoading(bool) {
+    return {
+        type: 'DATA_IS_LOADING',
+        isLoading: bool
+    };
+}
 export function usersFetchDataSuccess(users) {
     return {
         type: 'USERS_FETCH_DATA_SUCCESS',
@@ -17,6 +22,7 @@ export function usersFetchDataSuccess(users) {
 export function getUsers(url,data=undefined) {
 
     return (dispatch) => {
+                dispatch(dataIsLoading(true));
 
         if(data) {
             return axios({
@@ -28,6 +34,8 @@ export function getUsers(url,data=undefined) {
             })
             .then(function(response){
                 dispatch(usersFetchDataSuccess(response.data));
+                dispatch(dataIsLoading(false));
+
             })
             .catch(function(response){
                 dispatch(dataHasErrored(response.data));
@@ -43,6 +51,8 @@ export function getUsers(url,data=undefined) {
             .then(function(response){
                 console.log(response);
                 dispatch(usersFetchDataSuccess(response.data));
+                dispatch(dataIsLoading(false));
+
             })
             .catch(function(response){
                 dispatch(dataHasErrored(response.data));

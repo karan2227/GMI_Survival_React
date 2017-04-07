@@ -1,6 +1,6 @@
-export function usersHasErrored(state = false, action) {
+export function dataHasErrored(state = false, action) {
     switch (action.type) {
-        case 'USERS_HAS_ERRORED':
+        case 'DATA_HAS_ERRORED':
             return action.hasErrored;
 
         default:
@@ -8,9 +8,8 @@ export function usersHasErrored(state = false, action) {
     }
 }
 
-export function loginUsers(state = [], action) {
-    console.log('insdide reducer of user');
-
+export function users(state = [], action){
+    console.log(action,'reducer');
     switch (action.type) {
         case 'USERS_FETCH_DATA_SUCCESS':
             return action.users;

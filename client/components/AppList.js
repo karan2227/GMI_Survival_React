@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 //all actions which are linked to other components by "team_discussed" series of links
 import { getUsers } from '../actions/actions';
 //Naming convention for all components
-import Main from './MainComponent';
+import Main from './Main.component';
 
 const mapStateToProps = (state) => {
     return {

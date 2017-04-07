@@ -1,47 +1,54 @@
-export function usersHasErrored(bool) {
+import axios from 'axios';
+
+export function dataHasErrored(bool) {
     return {
-        type: 'USERS_HAS_ERRORED',
+        type: 'DATA_HAS_ERRORED',
         hasErrored: bool
     };
 }
-export function usererFetchDataSuccess(users) {
 
+export function usersFetchDataSuccess(users) {
     return {
         type: 'USERS_FETCH_DATA_SUCCESS',
         users
     };
 }
 
-export function getUsers(url){
-    return (dispatch)=>{
-        fetch(url).then((response)=>{
-            return response;
-        })
-        .then((response) => response.json())
-        .then((users) => dispatch(userFetchDataSuccess(users)))
-        .catch(() => dispatch(usersHasErrored(true)));
-    }
+export function getUsers(url,data=undefined) {
+
+    return (dispatch) => {
+
+        if(data) {
+            return axios({
+                url :url,
+                timeout: 20000,
+                method: 'post',
+                data,
+                responseType: 'json'
+            })
+            .then(function(response){
+                dispatch(usersFetchDataSuccess(response.data));
+            })
+            .catch(function(response){
+                dispatch(dataHasErrored(response.data));
+            })
+        }
+        else if(!data) {
+            return axios({
+                url :url,
+                timeout: 20000,
+                method: 'get',
+                responseType: 'json'
+            })
+            .then(function(response){
+                console.log(response);
+                dispatch(usersFetchDataSuccess(response.data));
+            })
+            .catch(function(response){
+                dispatch(dataHasErrored(response.data));
+            })
+        }
+
+       
+    };
 }
-
-// export function stockFetchDataSuccess(items) {
-
-//     return {
-//         type: 'STOCKS_FETCH_DATA_SUCCESS',
-//         items
-//     };
-// }
-
-
-
-// export function getStocks(url){
-//     return (dispatch)=>{
-//         fetch(url).then((response)=>{
-//             return response;
-//         })
-//         .then((response) => response.json())
-//         .then((items) => {
-//             dispatch(stockFetchDataSuccess(items.stock));
-//         })
-//         .catch(() => dispatch(itemsHasErrored(true)));
-//     }
-// }

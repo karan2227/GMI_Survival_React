@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginUserList from './LoginUserList';
+import {Link} from 'react-router';
 
 export default class Login extends React.Component{
     constructor(props){
@@ -8,19 +8,29 @@ export default class Login extends React.Component{
         console.log(this.props);
     }
 
+    loginUserLocal(){
+        var userName=this.refs.selectedUser.value;
+        this.props.loggedInUser(userName);
+    }
+
+
+
     render(){
         console.log(this.props.users,'users');
         var showUserList=this.props.users.map((user,index)=> {
             return(
-            <LoginUserList userList={user.name} key={index} {...this.props}/>
+            <option value={user.name}>{user.name}</option>
             )
         })
         console.log(showUserList)
         return(
             <div>
-            <select>
+            <select ref="selectedUser">
             {showUserList}
             </select>
+            <Link to ="/trader">
+            <input type="button" value="LOGIN" onClick={ this.loginUserLocal.bind(this)}/>
+            </Link>
             </div>
         );
         }

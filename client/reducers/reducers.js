@@ -19,7 +19,7 @@ export function dataIsLoading(state = false, action) {
 
 
 export function users(state = [], action){
-    console.log(action,'reducer');
+ 
     switch (action.type) {
         case 'USERS_FETCH_DATA_SUCCESS':
             return action.users;
@@ -34,7 +34,7 @@ export function selectedUser(state=[],action){
 
         var myUser=action.user;
         var newState=[...state,myUser]
-        console.log(newState);
+     
         return newState;
 
         default:

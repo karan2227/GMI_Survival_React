@@ -19,7 +19,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         //state function
         getUsers: (url) => dispatch(getUsers(url)),
-        // getTraders: (url) => dispatch(getTraders(url))
         loggedInUser: (user)=> dispatch(selectedUser(user))
     };
 }

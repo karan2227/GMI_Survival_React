@@ -3,7 +3,7 @@ import React from 'react';
 class Main extends React.Component{
 
     componentDidMount(){
-        this.props.getUsers("http://localhost:8080/users");
+        this.props.getUsers("http://10.203.60.100:8080/users");
     }
 
 

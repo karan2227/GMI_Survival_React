@@ -49,7 +49,7 @@ export function getUsers(url,data=undefined) {
                 responseType: 'json'
             })
             .then(function(response){
-                console.log(response);
+             
                 dispatch(usersFetchDataSuccess(response.data));
                 dispatch(dataIsLoading(false));
 

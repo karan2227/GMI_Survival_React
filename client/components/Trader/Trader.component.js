@@ -29,7 +29,7 @@ export default class Trader extends React.Component{
     }
 
     render(){
-        console.log(this.props);
+       
         return(
             <div>
         <h1>Hello {this.props.currentSelectedUser}</h1>

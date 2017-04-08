@@ -14,21 +14,22 @@ export default class Trader extends React.Component {
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
-
+componentDidMount(){
+        this.props.getStocks("http://localhost:8080/instruments");
+        this.props.getOrders("http://localhost:8080/orders");
+}
     handleOpenModal() {
         this.setState({ showModal: true });
     }
     handleCloseModal() {
         this.setState({ showModal: false });
     }
-
-
+      
     createOrder() {
         console.log('inside 1');
         console.log(this.props.stocks);
         console.log(ReactDOM.findDOMNode(this.refs.orderNumber).value)
         var num = ReactDOM.findDOMNode(this.refs.orderNumber).value;
-
 
         var id = "";
         var side = "";
@@ -86,14 +87,14 @@ export default class Trader extends React.Component {
         }
     }
     render() {
-        var chartData = [];
-        var x = {};
-        var OrdersToData = this.props.orders.map((obj, index) => {
-            var quantityExecuted = (obj.quantityExecuted / obj.quantity),
-                quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,
-                quantity = 1 - quantityExecuted - quantityPlaced;
-            chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
-        })
+        // var chartData = [];
+        // var x = {};
+        // var OrdersToData = this.props.orders.map((obj, index) => {
+        //     var quantityExecuted = (obj.quantityExecuted / obj.quantity),
+        //         quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,
+        //         quantity = 1 - quantityExecuted - quantityPlaced;
+        //     chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
+        // })
 
         return (
 
@@ -113,8 +114,10 @@ export default class Trader extends React.Component {
                     <button type="button" className="btn btn-danger pull-right" onClick={this.handleCloseModal.bind(this)}>CANCEL</button>
                     <button type="button" className="btn btn-success pull-right" onClick={this.createOrder.bind(this)}>CREATE</button>
                 </ReactModal>
-                {React.cloneElement(this.props.children, this.props)}
-                {OrdersToData}
-                <Chart data={chartData}/>
-            </div>)}
+                
+            
+            </div>)
+    }
 }
+//     {OrdersToData}
+//                 <Chart data={chartData} />

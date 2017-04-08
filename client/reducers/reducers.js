@@ -19,11 +19,25 @@ export function dataIsLoading(state = false, action) {
 
 
 export function users(state = [], action){
-    console.log(action,'reducer');
+ 
     switch (action.type) {
         case 'USERS_FETCH_DATA_SUCCESS':
             return action.users;
         default:
             return state;
+    }
+}
+
+export function selectedUser(state=[],action){
+    switch(action.type){
+        case 'SELECTED_USER':
+
+        var myUser=action.user;
+        var newState=[...state,myUser]
+     
+        return newState;
+
+        default:
+        return state;
     }
 }

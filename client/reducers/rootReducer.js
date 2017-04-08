@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
-import { users,dataHasErrored,dataIsLoading } from './reducers';//all reducers to merge into combineReducers
+
+import { users,dataHasErrored,selectedUser,dataIsLoading } from './reducers';//all reducers to merge into combineReducer
+
 
 var rootReducer = combineReducers({ 
     users,
     dataHasErrored,
+    selectedUser,
     dataIsLoading
 });
 

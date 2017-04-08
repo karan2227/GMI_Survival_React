@@ -1,28 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 
 var BarStackHorizontalChart = require('react-d3-basic').BarStackHorizontalChart;
 
 class Chart extends React.Component {
-
-    // componentDidMount(){
-    //     this.props.getOrders("http://10.203.60.100/predefinedOrders");
-    // }
-
     render() {
 
         var chartSeries = [
             {
                 field: 'quantityExecuted',
                 name: 'Executed',
+                color: '#FF8000'
             },
             {
                 field: 'quantityPlaced',
                 name: 'Placed',
+                color: '#FEBB68'
             },
             {
                 field: 'quantity',
                 name: 'Total',
+                color: '#FFEFBF'
             }
         ];
         var y = function (d) {
@@ -34,21 +32,18 @@ class Chart extends React.Component {
             yScale = 'ordinal',
             yLabel = 'Order Id',
 
-            xTickFormat = d3.format(".2s")
-     
-
-        // var orderData=this.props.orders[0];
-        //   console.log(orderData);   
+            xTickFormat = d3.format("%")
+      
         return (
 
             <div className="container">
-                <h1>Order Execution Status</h1>
                 <BarStackHorizontalChart
                     title='Order Execution Status'
-                    data={this.props.orders}
+                    data={this.props.data}
                     chartSeries={chartSeries}
                     width={500}
                     height={100}
+                    showYGrid= {false}
                     yScale={yScale}
                     yLabel={yLabel}
                     y={y}

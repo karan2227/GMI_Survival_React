@@ -10,6 +10,7 @@ import Main from './components/Main.component';
 import Login from './components/Login/Login.component';
 import Chart from './components/Trader/Chart.component';
 import Trader from './components/Trader/Trader.component';
+
 const store = configureStore();
 //here sending empty initialstates
 render(

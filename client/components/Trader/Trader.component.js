@@ -15,6 +15,7 @@ export default class Trader extends React.Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 componentDidMount(){
+    console.log('did mount trader');
         this.props.getStocks("http://localhost:8080/instruments");
         this.props.getOrders("http://localhost:8080/orders");
 }
@@ -31,56 +32,33 @@ componentDidMount(){
         console.log(ReactDOM.findDOMNode(this.refs.orderNumber).value)
         var num = ReactDOM.findDOMNode(this.refs.orderNumber).value;
 
-        var id = "";
+        
         var side = "";
         var symbol = "";
         var quantity = "";
-        var qtyPlaced = "";
-        var qtyExecuted = "";
         var limitPrice = "";
-        var priority = "";
-        var status = ""
         var traderId = "";
         var i;
         for (i = 0; i < num; i++) {
             var ind = Math.ceil(Math.random() * 30);
-            id = Math.ceil(Math.random() * 100);
-            var s = Math.ceil(Math.random() * 2);
+            var s = Math.ceil(Math.random() *2 );
             if (s == 1) {
                 side = 'buy';
             }
+            
             else {
                 side = 'sell';
             }
 
             quantity = Math.ceil(Math.random() * 100);
-            qtyPlaced = Math.ceil(Math.random() * 90);
-            qtyExecuted = Math.ceil(Math.random() * 80);
-            limitPrice = Math.random() * 80;
-            priority = Math.ceil(Math.random() * 100);
-
-            var myStatus = Math.ceil(Math.random() * 3);
-
-            if (myStatus == 1) {
-                status = 'New';
-            }
-
-            else {
-                status = 'Executed';
-            }
-
+            limitPrice = Math.random() * 100;
+            
             var data = {
-                id: id,
-                creationTime: new Date(),
                 side: side,
                 symbol: this.props.stocks[ind - 1].symbol,
                 quantity: quantity,
-                quantityPlaced: qtyPlaced,
-                quantityExecuted: qtyExecuted,
                 limitPrice: limitPrice,
-                priority: priority,
-                status: status,
-                traderId: this.props.stocks[ind - 1].name
+                traderId: this.props.currentSelectedUser[0].id
             }
             console.log(data);
             this.props.getOrders('http://localhost:8080/orders', data)
@@ -89,7 +67,7 @@ componentDidMount(){
     render() {
         // var chartData = [];
         // var x = {};
-        // var OrdersToData = this.props.orders.map((obj, index) => {
+        // this.props.orders.map((obj, index) => {
         //     var quantityExecuted = (obj.quantityExecuted / obj.quantity),
         //         quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,
         //         quantity = 1 - quantityExecuted - quantityPlaced;
@@ -97,9 +75,8 @@ componentDidMount(){
         // })
 
         return (
-
             <div>
-                <h1>Hello {this.props.currentSelectedUser}</h1>
+                <h1>Hello {this.props.currentSelectedUser[0].name}</h1>
                 <button className="btn btn-success" onClick={this.handleOpenModal}>ADD TRADE ORDERS</button>
                 <ReactModal
                     isOpen={this.state.showModal}
@@ -119,5 +96,4 @@ componentDidMount(){
             </div>)
     }
 }
-//     {OrdersToData}
 //                 <Chart data={chartData} />

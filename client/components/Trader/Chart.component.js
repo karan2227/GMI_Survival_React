@@ -31,7 +31,7 @@ class Chart extends React.Component {
             },
             yScale = 'ordinal',
             yLabel = 'Order Id',
-
+            xTicks=[2,"%"]
             xTickFormat = d3.format("%")
       
         return (
@@ -43,6 +43,7 @@ class Chart extends React.Component {
                     chartSeries={chartSeries}
                     width={500}
                     height={100}
+                    xTicks={xTicks}
                     showYGrid= {false}
                     yScale={yScale}
                     yLabel={yLabel}

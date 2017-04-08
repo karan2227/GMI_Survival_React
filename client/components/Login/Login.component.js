@@ -10,11 +10,20 @@ export default class Login extends React.Component{
 
     loginUserLocal(){
         var userName=this.refs.selectedUser.value;
-        this.props.loggedInUser(userName);
+         var user;
+         for(let u of this.props.users){
+           
+            if(userName === u.name){
+                
+                user = u;
+                
+            }
+        }
+        this.props.loggedInUser(user);
     }
 
     render(){
- 
+        console.log(this.props);
         var showUserList=this.props.users.map((user,index)=> {
             return(
             <option value={user.name} key={index}>{user.name}</option>

@@ -18,6 +18,12 @@ export function usersFetchDataSuccess(users) {
         users
     };
 }
+export function ordersFetchDataSuccess(orders) {
+    return {
+        type: 'ORDERS_FETCH_DATA_SUCCESS',
+        orders
+    };
+}
 
 export function getUsers(url,data=undefined) {
 
@@ -62,7 +68,28 @@ export function getUsers(url,data=undefined) {
        
     };
 }
+export function getOrders(url) {
 
+    return (dispatch) => {
+                dispatch(dataIsLoading(true));
+           return axios({
+                url :url,
+                timeout: 20000,
+                method: 'get',
+                responseType: 'json'
+            })
+            .then(function(response){
+             
+                dispatch(ordersFetchDataSuccess(response.data));
+                dispatch(dataIsLoading(false));
+
+            })
+            .catch(function(response){
+                dispatch(dataHasErrored(response.data));
+            })
+        }
+
+    };
 export function dispatchToDisplay(user){
     return {
         type:'SELECTED_USER',

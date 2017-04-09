@@ -32,6 +32,7 @@ export default class Login extends React.Component{
     
         return(
             <div>
+                <h1>LOGIN</h1>
             <select ref="selectedUser">
             {showUserList}
             </select>

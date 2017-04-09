@@ -81,8 +81,6 @@ export function ordersFetchDataSuccess(orders){
 }
 
 export function getOrders(url,data) {
-    console.log('Inside action');
-    console.log(data);
     return (dispatch) => {
                 dispatch(dataIsLoading(true));
 

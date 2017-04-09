@@ -17,6 +17,8 @@ export default class Trader extends React.Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.openChart=this.openChart.bind(this);
         this.openTable=this.openTable.bind(this);
+        this.deleteOrders=this.deleteOrders.bind(this);
+        this.refreshData=this.refreshData.bind(this);
     }
 componentDidMount(){
     console.log('did mount trader');
@@ -37,6 +39,10 @@ componentDidMount(){
     openChart(){
         console.log("inside open chart")
         this.setState({showContainer: true});
+    }
+
+    deleteOrders(){
+        axios.delete("http://localhost:8080/orders");
     }
       
     createOrder() {
@@ -76,7 +82,13 @@ componentDidMount(){
             console.log(data);
             this.props.getOrders('http://localhost:8080/orders', data)
         }
+         this.setState({ showModal: false });
     }
+
+    refreshData(){
+        this.props.getOrders('http://localhost:8080/orders')
+    }
+
     render() {
         //  var chartData = [];
         //  var x = {};
@@ -100,11 +112,6 @@ componentDidMount(){
                     
                 }
 
-                var style={
-                    height:100,
-                    width:100
-                }
-
         return (
             <div>
                 <div>
@@ -121,8 +128,8 @@ componentDidMount(){
                     <div className="bottom">
                         <ul  className="drop-menu">
                             <li> <button type="button" className="btn-sm button btn btn-primary" onClick={this.handleOpenModal}>Trade</button></li>
-                            <li> <button type="button" className="btn-sm button2 btn btn-primary">Delete All</button></li>
-                            <li> <button type="button" className="btn-sm button2 btn btn-primary">Refresh</button></li>
+                            <li> <button type="button" className="btn-sm button2 btn btn-primary" onClick={this.deleteOrders}>Delete All</button></li>
+                            <li> <button type="button" className="btn-sm button2 btn btn-primary" onClick={this.refreshData}>Refresh</button></li>
                             <li className="pull-right "> <button className="icon chart btn btn-primary button2" onClick={this.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
                             <li className="pull-right"> <button className="icon btn btn-primary button2" onClick={this.openTable}> <i className="fa fa-table" aria-hidden="true"></i></button></li>                            
                         </ul>
@@ -135,7 +142,7 @@ componentDidMount(){
                 <ReactModal
                     isOpen={this.state.showModal}
                     contentLabel="onRequestClose Example"
-                    onRequestClose={this.handleCloseModal} style={style}>
+                    onRequestClose={this.handleCloseModal}>
                     <div>
                         <h3>Enter number of trades</h3>
                         <hr />

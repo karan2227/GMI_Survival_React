@@ -3,16 +3,20 @@ import Chart from './Chart.component';
 import ReactModal from 'react-modal';
 import ReactDOM from 'react-dom';
 import Table from './Table.component';
+import Header from './Header';
+import Footer from './Footer';
 
 export default class Trader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showModal: false,
-            id: 0
+            showContainer: false
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.openChart=this.openChart.bind(this);
+        this.openTable=this.openTable.bind(this);
     }
 componentDidMount(){
     console.log('did mount trader');
@@ -24,6 +28,15 @@ componentDidMount(){
     }
     handleCloseModal() {
         this.setState({ showModal: false });
+    }
+
+    openTable(){
+        this.setState({showContainer: false});
+    }
+
+    openChart(){
+        console.log("inside open chart")
+        this.setState({showContainer: true});
     }
       
     createOrder() {
@@ -65,23 +78,64 @@ componentDidMount(){
         }
     }
     render() {
-        // var chartData = [];
-        // var x = {};
-        // this.props.orders.map((obj, index) => {
-        //     var quantityExecuted = (obj.quantityExecuted / obj.quantity),
-        //         quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,
-        //         quantity = 1 - quantityExecuted - quantityPlaced;
-        //     chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
-        // })
+        //  var chartData = [];
+        //  var x = {};
+        //  this.props.orders.map((obj, index) => {
+        //  var quantityExecuted = (obj.quantityExecuted / obj.quantity),
+        //  quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,
+        //     quantity = 1 - quantityExecuted - quantityPlaced;
+        // chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
+        //  })
+
+        var chartOrTable;
+        if(this.state.showContainer){
+                    //<Chart data={chartData}/>
+                    
+                   chartOrTable= <h1>CHART COMPONENT</h1>
+                
+                }
+                else{
+                    
+                    chartOrTable= <Table myOrders={this.props.orders}></Table>
+                    
+                }
+
+                var style={
+                    height:100,
+                    width:100
+                }
 
         return (
             <div>
-                <h1>Hello {this.props.currentSelectedUser[0].name}</h1>
-                <button className="btn btn-success" onClick={this.handleOpenModal}>ADD TRADE ORDERS</button>
+                <div>
+                <header>
+                <nav>
+                    <div className="top">
+                        <ul  className="drop-menu">
+                            <li className="traderdesktop">Trader Desktop</li>
+                            <li className="pull-right signout"><a href="http://localhost:1000">Sign Out</a></li>
+                            <li className="pull-right tradername">{this.props.currentSelectedUser[0].name}</li> 
+                        </ul>
+                    </div>
+                    <hr></hr>
+                    <div className="bottom">
+                        <ul  className="drop-menu">
+                            <li> <button type="button" className="btn-sm button btn btn-primary" onClick={this.handleOpenModal}>Trade</button></li>
+                            <li> <button type="button" className="btn-sm button2 btn btn-primary">Delete All</button></li>
+                            <li> <button type="button" className="btn-sm button2 btn btn-primary">Refresh</button></li>
+                            <li className="pull-right "> <button className="icon chart btn btn-primary button2" onClick={this.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
+                            <li className="pull-right"> <button className="icon btn btn-primary button2" onClick={this.openTable}> <i className="fa fa-table" aria-hidden="true"></i></button></li>                            
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            </div>
+                
+                <div>
                 <ReactModal
                     isOpen={this.state.showModal}
                     contentLabel="onRequestClose Example"
-                    onRequestClose={this.handleCloseModal}>
+                    onRequestClose={this.handleCloseModal} style={style}>
                     <div>
                         <h3>Enter number of trades</h3>
                         <hr />
@@ -91,9 +145,14 @@ componentDidMount(){
                     <button type="button" className="btn btn-danger pull-right" onClick={this.handleCloseModal.bind(this)}>CANCEL</button>
                     <button type="button" className="btn btn-success pull-right" onClick={this.createOrder.bind(this)}>CREATE</button>
                 </ReactModal>
-                
-            
-            </div>)
+                        </div>
+                        <div className="container">
+                        {chartOrTable}
+                        </div>
+                        <Footer/>
+            </div>
+            )
     }
 }
-//                 <Chart data={chartData} />
+
+//<Chart data={chartData}/>

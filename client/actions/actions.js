@@ -103,7 +103,6 @@ export function getOrders(url,data) {
             })
         }
         else if(!data) {
-            console.log('inside get action');
             return axios({
                 url :url,
                 timeout: 20000,

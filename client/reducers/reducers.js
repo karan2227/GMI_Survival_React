@@ -50,7 +50,6 @@ export function selectedUser(state=[],action){
         case 'SELECTED_USER':
         var myUser=action.user;
         var newState=[...state,myUser]
-        console.log(newState,'prassaaannnnnnnnaaaaaa');
         return newState;
 
         default:

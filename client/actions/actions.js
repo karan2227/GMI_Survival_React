@@ -183,3 +183,28 @@ export function updateOrder(reply,data){
     return{type:reply
         ,data};
 }
+
+export function deleteOrder(url,data=undefined) {
+
+    return (dispatch) => {
+                dispatch(dataIsLoading(true));
+
+        
+            return axios({
+                url :url,
+                timeout: 20000,
+                method: 'delete',
+                responseType: 'json'
+            })
+            .then(function(response){
+                // dispatch(stocksFetchDataSuccess(response.data));
+                // dispatch(dataIsLoading(false));
+
+            })
+            .catch(function(response){
+                dispatch(dataHasErrored(response.data));
+            })
+        
+       
+    };
+}

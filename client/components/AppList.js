@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 //all actions which are linked to other components by "team_discussed" series of links
-import { getUsers,selectedUser,getOrders,getStocks,updateOrder } from '../actions/actions';
+import { getUsers,selectedUser,getOrders,getStocks,updateOrder,deleteOrder } from '../actions/actions';
 
 //Naming convention for all components
 import Main from './Main.component';
@@ -26,7 +26,8 @@ const mapDispatchToProps = (dispatch) => {
         loggedInUser: (user)=> dispatch(selectedUser(user)),
         getOrders: (url,data)=> dispatch(getOrders(url,data)),
         getStocks: (url) => dispatch(getStocks(url)),
-        updateOrderSocket:(data1,data2)=> dispatch(updateOrder(data1,data2))
+        updateOrderSocket:(data1,data2)=> dispatch(updateOrder(data1,data2)),
+        deleteOrder: (url) => dispatch(deleteOrder(url))
 
     };
 }

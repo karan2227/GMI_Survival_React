@@ -36,6 +36,9 @@ export function orders(state=[],action){
 
         case 'orderCreatedEvent':
         return [...state,action.data]
+
+        case 'allOrdersDeletedEvent':
+        return []
         
         // case 'ORDERS_POST_DATA_SUCCESS':
         // var newState = [];

@@ -46,7 +46,7 @@ componentDidMount(){
     }
 
     deleteOrders(){
-        axios.delete("http://localhost:8080/orders");
+        this.props.deleteOrder("http://localhost:8080/orders");
     }
       
     createOrder() {
@@ -85,10 +85,8 @@ componentDidMount(){
             }
             console.log(data);
             this.props.getOrders('http://localhost:8080/orders', data);
-            //  this.props.getOrders('http://localhost:8080/orders');
+            
         }
-        // this.props.getOrders('http://localhost:8080/orders');
-        //  console.log(this.props.orders,'ashuuuuuuuuuuuuuuuuuuuuuuuu');
             
         this.setState({ showModal: false });
         

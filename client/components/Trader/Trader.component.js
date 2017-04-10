@@ -13,8 +13,8 @@ export default class Trader extends React.Component {
         super(props);
         this.state = {
             showModal: false,
-            showContainer: false,
-            current: 0,
+            showContainer: false
+            
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);

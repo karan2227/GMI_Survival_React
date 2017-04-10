@@ -1,8 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router'
 import Chart from './Chart.component';
 import ReactModal from 'react-modal';
 import ReactDOM from 'react-dom';
 import Table from './Table.component';
+import Websocket from 'react-websocket';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -11,7 +13,8 @@ export default class Trader extends React.Component {
         super(props);
         this.state = {
             showModal: false,
-            showContainer: false
+            showContainer: false,
+            current: 0,
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -25,6 +28,7 @@ componentDidMount(){
         this.props.getStocks("http://localhost:8080/instruments");
         this.props.getOrders("http://localhost:8080/orders");
 }
+
     handleOpenModal() {
         this.setState({ showModal: true });
     }
@@ -77,33 +81,46 @@ componentDidMount(){
                 symbol: this.props.stocks[ind - 1].symbol,
                 quantity: quantity,
                 limitPrice: limitPrice,
-                traderId: this.props.currentSelectedUser[0].id
+                traderId: this.props.currentSelectedUser.id
             }
             console.log(data);
-            this.props.getOrders('http://localhost:8080/orders', data)
+            this.props.getOrders('http://localhost:8080/orders', data);
+            //  this.props.getOrders('http://localhost:8080/orders');
         }
-         this.setState({ showModal: false });
+        // this.props.getOrders('http://localhost:8080/orders');
+        //  console.log(this.props.orders,'ashuuuuuuuuuuuuuuuuuuuuuuuu');
+            
+        this.setState({ showModal: false });
+        
+         
     }
 
     refreshData(){
         this.props.getOrders('http://localhost:8080/orders')
     }
+ 
+    handleData(data){
+   data=data.substring(2,data.length);
+   data=JSON.parse(data);
+   console.log(data[0],data[1]);
+    this.props.updateOrderSocket(data[0],data[1]);
+   //this.props.getOrders("http://localhost:8080/orders");
+ } 
+
 
     render() {
-        //  var chartData = [];
-        //  var x = {};
-        //  this.props.orders.map((obj, index) => {
-        //  var quantityExecuted = (obj.quantityExecuted / obj.quantity),
-        //  quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,
-        //     quantity = 1 - quantityExecuted - quantityPlaced;
-        // chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
-        //  })
-
+        console.log(this.props.orders,"my chcek");
         var chartOrTable;
         if(this.state.showContainer){
-                    //<Chart data={chartData}/>
-                    
-                   chartOrTable= <h1>CHART COMPONENT</h1>
+             var chartData = [];
+             console.log(this.props,"hgghcvvghkcv");
+         for(var obj of this.props.orders){
+         var quantityExecuted = (obj.quantityExecuted / obj.quantity),
+         quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,
+            quantity = 1 - quantityExecuted - quantityPlaced;
+        chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
+         }
+                   chartOrTable= <Chart data={chartData}/>
                 
                 }
                 else{
@@ -111,6 +128,8 @@ componentDidMount(){
                     chartOrTable= <Table myOrders={this.props.orders}></Table>
                     
                 }
+
+                
 
         return (
             <div>
@@ -120,8 +139,8 @@ componentDidMount(){
                     <div className="top">
                         <ul  className="drop-menu">
                             <li className="traderdesktop">Trader Desktop</li>
-                            <li className="pull-right signout"><a href="http://localhost:1000">Sign Out</a></li>
-                            <li className="pull-right tradername">{this.props.currentSelectedUser[0].name}</li> 
+    <li className="pull-right signout"><Link to="/"><button>Sign Out</button></Link></li>
+        <li className="pull-right tradername">{this.props.currentSelectedUser.name}</li> 
                         </ul>
                     </div>
                     <hr></hr>
@@ -157,9 +176,9 @@ componentDidMount(){
                         {chartOrTable}
                         </div>
                         <Footer/>
+                        <Websocket url='ws://localhost:8080/socket.io/?transport=websocket' 
+                 onMessage={this.handleData.bind(this)}/> 
             </div>
             )
     }
 }
-
-//<Chart data={chartData}/>

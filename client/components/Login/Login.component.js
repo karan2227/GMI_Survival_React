@@ -7,7 +7,11 @@ export default class Login extends React.Component{
         this.state={}
       
     }
-
+// componentDidMount(){
+//     console.log('did mount login');
+//         this.props.getStocks("http://localhost:8080/instruments");
+//         this.props.getOrders("http://localhost:8080/orders");
+// }
     loginUserLocal(){
         var userName=this.refs.selectedUser.value;
          var user;

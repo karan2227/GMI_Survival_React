@@ -3,7 +3,6 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
  
 export default class Trader extends React.Component{
     render(){
- 
         return ( <div>
     <BootstrapTable data={this.props.myOrders} bordered={false}>
                 <TableHeaderColumn dataField='id' dataAlign="center" isKey={true}  dataSort={ true }>ID</TableHeaderColumn>

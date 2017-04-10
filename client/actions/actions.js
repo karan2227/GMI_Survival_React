@@ -32,9 +32,8 @@ export function getUsers(url,data=undefined) {
                 responseType: 'json'
             })
             .then(function(response){
-                dispatch(usersFetchDataSuccess(response.data));
-                dispatch(dataIsLoading(false));
-
+                 dispatch(usersFetchDataSuccess(response.data));
+                 dispatch(dataIsLoading(false));
             })
             .catch(function(response){
                 dispatch(dataHasErrored(response.data));
@@ -79,6 +78,12 @@ export function ordersFetchDataSuccess(orders){
         orders
     };
 }
+export function ordersPostDataSuccess(orders){
+    return {
+        type: 'ORDERS_POST_DATA_SUCCESS',
+        orders
+    };
+}
 
 export function getOrders(url,data) {
     return (dispatch) => {
@@ -94,8 +99,8 @@ export function getOrders(url,data) {
                 responseType: 'json'
             })
             .then(function(response){
-                dispatch(ordersFetchDataSuccess(response.data));
-                dispatch(dataIsLoading(false));
+                // dispatch(ordersFetchDataSuccess(response.data));
+                //dispatch(dataIsLoading(false));
 
             })
             .catch(function(response){
@@ -110,7 +115,6 @@ export function getOrders(url,data) {
                 responseType: 'json'
             })
             .then(function(response){
-             
                 dispatch(ordersFetchDataSuccess(response.data));
                 dispatch(dataIsLoading(false));
 
@@ -145,8 +149,8 @@ export function getStocks(url,data=undefined) {
                 responseType: 'json'
             })
             .then(function(response){
-                dispatch(stocksFetchDataSuccess(response.data));
-                dispatch(dataIsLoading(false));
+                // dispatch(stocksFetchDataSuccess(response.data));
+                // dispatch(dataIsLoading(false));
 
             })
             .catch(function(response){
@@ -173,4 +177,9 @@ export function getStocks(url,data=undefined) {
 
        
     };
+}
+
+export function updateOrder(reply,data){
+    return{type:reply
+        ,data};
 }

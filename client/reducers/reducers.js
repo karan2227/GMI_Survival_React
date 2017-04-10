@@ -35,11 +35,30 @@ export function orders(state=[],action){
         return newState;
 
         case 'orderCreatedEvent':
-        return [...state,action.data]
+        return [...state,action.data];
 
         case 'allOrdersDeletedEvent':
-        return []
-        
+        return [];
+
+        case 'placementCreatedEvent':
+        var i;
+        for(i=0;i<state.length;i++){
+            if(state[i].id==action.data.orderId){
+                state[i].quantityPlaced=action.data.quantityPlaced;
+                state[i].status=action.data.status;
+                }
+            }
+        return [...state];
+
+        case 'executionCreatedEvent':
+        var i;
+        for(i=0;i<state.length;i++){
+            if(state[i].id==action.data.orderId){
+                state[i].quantityExecuted=action.data.quantityExecuted;
+                state[i].status=action.data.status;
+                }
+            }
+        return [...state];
         // case 'ORDERS_POST_DATA_SUCCESS':
         // var newState = [];
         // newState=state;

@@ -4,7 +4,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 export default class Trader extends React.Component{
     render(){
         return ( <div>
-    <BootstrapTable data={this.props.myOrders} bordered={false}>
+    <BootstrapTable data={this.props.orders} bordered={false}>
                 <TableHeaderColumn dataField='id' dataAlign="center" isKey={true}  dataSort={ true }>ID</TableHeaderColumn>
                 <TableHeaderColumn dataField='creationTime' dataAlign="center"  dataSort={ true }>Creation Time</TableHeaderColumn>
                 <TableHeaderColumn dataField='side' dataAlign="center"  dataSort={ true }>Side</TableHeaderColumn>

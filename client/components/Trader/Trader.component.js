@@ -123,7 +123,7 @@ componentDidMount(){
                 }
                 else{
                     
-                    chartOrTable= <Table myOrders={this.props.orders}></Table>
+                    chartOrTable= <Table {...this.props}></Table>
                     
                 }
 

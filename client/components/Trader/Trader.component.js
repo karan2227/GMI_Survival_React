@@ -153,7 +153,7 @@ componentDidMount(){
                     <button type="button" className="btn btn-success pull-right" onClick={this.createOrder.bind(this)}>CREATE</button>
                 </ReactModal>
                         </div>
-                        <div className="container">
+                        <div className="container-fluid">
                         {chartOrTable}
                         </div>
                         <Footer/>

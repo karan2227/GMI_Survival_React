@@ -34,11 +34,11 @@ export default class Header extends React.Component {
                             <hr></hr>
                             <div className="bottom">
                                 <ul className="drop-menu">
-                                    <li> <button type="button" className="btn-sm button btn btn-primary" data-toggle="modal" data-target="#myModal" onClick={this.focus.bind(this)}>Trade</button></li>
-                                    <li> <button type="button" className="btn-sm button2 btn btn-primary" onClick={this.props.deleteOrders}>Delete All</button></li>
-                                    <li> <button type="button" className="btn-sm button2 btn btn-primary" onClick={this.props.refreshData}>Refresh</button></li>
-                                    <li className="pull-right "> <button className="icon chart btn btn-primary" onClick={this.props.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
-                                    <li className="pull-right"> <button className="icon btn btn-primary button2" onClick={this.props.openTable} > <i className="fa fa-table" aria-hidden="true"></i></button></li>
+                                    <li> <button type="button" className="btn-sm button btn btn-primary" id="buttons-left" data-toggle="modal" data-target="#myModal" onClick={this.focus.bind(this)}>Trade</button></li>
+                                    <li> <button type="button" className="btn-sm button2 btn btn-primary" id="buttons-left"onClick={this.props.deleteOrders}>Delete All</button></li>
+                                    <li> <button type="button" className="btn-sm button2 btn btn-primary" id="buttons-left" onClick={this.props.refreshData}>Refresh</button></li>
+                                    <li className="pull-right "> <button className="icon chart btn btn-primary" id="buttons-right" onClick={this.props.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
+                                    <li className="pull-right"> <button className="icon btn btn-primary button2" id="buttons-right" onClick={this.props.openTable} > <i className="fa fa-table" aria-hidden="true"></i></button></li>
                                 </ul>
                             </div>
                         </nav>

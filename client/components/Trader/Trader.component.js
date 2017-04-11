@@ -41,9 +41,9 @@ export default class Trader extends React.Component {
     }
 
     _createOrder(TraderTextBox) {
-        console.log('inside createOrder');
-        console.log(this.props.stocks);
-        console.log(ReactDOM.findDOMNode(this.refs.orderNumber).value);
+        // console.log('inside createOrder');
+        // console.log(this.props.stocks);
+        // console.log(ReactDOM.findDOMNode(this.refs.orderNumber).value);
         var num = TraderTextBox;
 
         var side = "";

@@ -44,7 +44,7 @@ export function orders(state=[],action){
         var i;
         for(i=0;i<state.length;i++){
             if(state[i].id==action.data.orderId){
-                state[i].quantityPlaced=action.data.quantityPlaced;
+                state[i].quantityPlaced+=action.data.quantityPlaced;
                 state[i].status=action.data.status;
                 }
             }
@@ -54,7 +54,7 @@ export function orders(state=[],action){
         var i;
         for(i=0;i<state.length;i++){
             if(state[i].id==action.data.orderId){
-                state[i].quantityExecuted=action.data.quantityExecuted;
+                state[i].quantityExecuted+=action.data.quantityExecuted;
                 state[i].status=action.data.status;
                 }
             }

@@ -49,6 +49,7 @@ class Chart extends React.Component {
                     y={y}
                     x={x}
                     xTickFormat={xTickFormat}
+                    showLegend={false}
                     />
             </div>
         )

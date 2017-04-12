@@ -111,7 +111,7 @@ constructor(props) {
                     windowSize => {
                         console.log(windowSize.windowWidth, windowSize.windowWidth)
                         this.setState({
-                            height: 0.90 * windowSize.windowHeight,
+                            height: 0.9 * windowSize.windowHeight,
                             width: 0.9 * windowSize.windowWidth
                         })
                     }

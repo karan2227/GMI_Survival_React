@@ -14,9 +14,7 @@ export default class Login extends React.Component {
         for (let u of this.props.users) {
 
             if (userName === u.name) {
-
                 user = u;
-
             }
         }
         this.props.loggedInUser(user);

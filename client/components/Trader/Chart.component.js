@@ -1,7 +1,7 @@
 import React from 'react';
 
-
 var BarStackHorizontalChart = require('react-d3-basic').BarStackHorizontalChart;
+import ChartLegend from './ChartLegend.component';
 
 class Chart extends React.Component {
     render() {
@@ -36,8 +36,8 @@ class Chart extends React.Component {
       
         return (
             <div className="container-fluid">
+                <ChartLegend />
                 <BarStackHorizontalChart
-                    title='Order Execution Status'
                     data={this.props.data}
                     chartSeries={chartSeries}
                     width={this.props.w}
@@ -51,6 +51,7 @@ class Chart extends React.Component {
                     xTickFormat={xTickFormat}
                     showLegend={false}
                     />
+                    
             </div>
         )
     }

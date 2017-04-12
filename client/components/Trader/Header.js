@@ -37,8 +37,8 @@ export default class Header extends React.Component {
                                     <li> <button type="button" className="btn-sm button btn" id="buttons-left" data-toggle="modal" data-target="#myModal" onClick={this.focus.bind(this)}>Trade</button></li>
                                     <li> <button type="button" className="btn-sm button2 btn" id="buttons-left"onClick={this.props.deleteOrders}>Delete All</button></li>
                                     <li> <button type="button" className="btn-sm button2 btn" id="buttons-left" onClick={this.props.refreshData}>Refresh</button></li>
-                                    <li className="pull-right "> <button className="icon chart btn" id="buttons-right" onClick={this.props.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
-                                    <li className="pull-right"> <button className="icon button2 btn" id="buttons-right" onClick={this.props.openTable} > <i className="fa fa-table" aria-hidden="true"></i></button></li>
+                                    <li className="pull-right "> <button className="icon chart btn btn-sm" id="buttons-right" onClick={this.props.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
+                                    <li className="pull-right"> <button className="icon button2 btn btn-sm" id="buttons-right" onClick={this.props.openTable} > <i className="fa fa-table" aria-hidden="true"></i></button></li>
                                 </ul>
                             </div>
                         </nav>

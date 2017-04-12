@@ -6,29 +6,27 @@ import Table from './Table.component';
 import Websocket from 'react-websocket';
 import Header from './Header';
 import Footer from './Footer';
+import { WindowResizeListener } from 'react-window-resize-listener';
 
 export default class Trader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showContainer: false
+constructor(props) {
+    super(props);
+    this.state = {
+        showContainer: false,
+        height: this.props.initialHeight,
+        width: this.props.initialWidth
 
-        };
+    };
+}
 
-
-    }
     componentDidMount() {
         console.log('did mount trader');
         this.props.getStocks("http://localhost:8080/instruments");
         this.props.getOrders("http://localhost:8080/orders");
 
     }
-
-
-
     _openTable() {
         this.setState({ showContainer: false });
-
     }
 
     _openChart() {
@@ -58,7 +56,6 @@ export default class Trader extends React.Component {
             if (s == 1) {
                 side = 'buy';
             }
-
             else {
                 side = 'sell';
             }
@@ -75,22 +72,11 @@ export default class Trader extends React.Component {
             }
             console.log(data);
             this.props.getOrders('http://localhost:8080/orders', data);
-
-
         }
-
-
-
-
-
     }
 
     _refreshData() {
-        this.props.getOrders('http://localhost:8080/orders');
-                
-
-
-
+        this.props.getOrders('http://localhost:8080/orders');        
     }
 
     handleData(data) {
@@ -100,7 +86,6 @@ export default class Trader extends React.Component {
         this.props.updateOrderSocket(data[0], data[1]);
         this.props.getOrders("http://localhost:8080/orders");
     }
-
 
     render() {
         console.log(this.props.orders, "my check");
@@ -114,19 +99,23 @@ export default class Trader extends React.Component {
                     quantity = 1 - quantityExecuted - quantityPlaced;
                 chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
             }
-            chartOrTable = <Chart data={chartData} />
+            chartOrTable = <Chart data={chartData} h={this.state.height} w={this.state.width} />
 
         }
         else {
-
             chartOrTable = <Table {...this.props}></Table>
-
         }
-
-
-
         return (
             <div>
+                < WindowResizeListener onResize = {
+                    windowSize => {
+                        console.log(windowSize.windowWidth, windowSize.windowWidth)
+                        this.setState({
+                            height: 0.90 * windowSize.windowHeight,
+                            width: 0.9 * windowSize.windowWidth
+                        })
+                    }
+                } />
                 <Header createOrder={this._createOrder.bind(this)} deleteOrders={this._deleteOrders.bind(this)} refreshData={this._refreshData.bind(this)} openChart={this._openChart.bind(this)} openTable={this._openTable.bind(this)}{...this.props} />
 
                 <div className="container-fluid">

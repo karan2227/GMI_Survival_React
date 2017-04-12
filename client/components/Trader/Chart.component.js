@@ -31,17 +31,17 @@ class Chart extends React.Component {
             },
             yScale = 'ordinal',
             yLabel = 'Order Id',
-            xTicks=[2,"%"],
-            xTickFormat = d3.format("%")
+            xTicks=[2,'%'],
+            xTickFormat = d3.format('%')
       
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <BarStackHorizontalChart
                     title='Order Execution Status'
                     data={this.props.data}
                     chartSeries={chartSeries}
-                    width={700}
-                    height={700}
+                    width={this.props.w}
+                    height={this.props.h}
                     xTicks={xTicks}
                     showYGrid= {false}
                     yScale={yScale}

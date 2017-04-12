@@ -7,11 +7,7 @@ export default class Login extends React.Component {
         this.state = {}
 
     }
-    // componentDidMount(){
-    //     console.log('did mount login');
-    //         this.props.getStocks("http://localhost:8080/instruments");
-    //         this.props.getOrders("http://localhost:8080/orders");
-    // }
+    
     loginUserLocal() {
         var userName = this.refs.selectedUser.value;
         var user;
@@ -47,9 +43,7 @@ export default class Login extends React.Component {
                     </select>
                 </div>
                 </form>
-                {/*<select ref="selectedUser">
-                    {showUserList}
-                </select>*/}
+                
                 <br/>
                 <Link to="/trader">
                     <button type="button" value="LOGIN" onClick={this.loginUserLocal.bind(this)} className="btn btn-lg loginbutton">Login</button>

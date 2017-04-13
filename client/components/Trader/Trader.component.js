@@ -13,8 +13,8 @@ constructor(props) {
     super(props);
     this.state = {
         showContainer: false,
-        height: this.props.initialHeight,
-        width: this.props.initialWidth
+        ht: this.props.initialHeight,
+        wt: this.props.initialWidth
 
     };
 }
@@ -99,7 +99,7 @@ constructor(props) {
                     quantity = 1 - quantityExecuted - quantityPlaced;
                 chartData.push({ id: obj.id, quantity, quantityExecuted, quantityPlaced });
             }
-            chartOrTable = <Chart data={chartData} h={this.state.height} w={this.state.width} />
+            chartOrTable = <Chart data={chartData} h={this.state.ht} w={this.state.wt} />
 
         }
         else {
@@ -111,8 +111,8 @@ constructor(props) {
                     windowSize => {
                         console.log(windowSize.windowWidth, windowSize.windowWidth)
                         this.setState({
-                            height: 0.9 * windowSize.windowHeight,
-                            width: 0.9 * windowSize.windowWidth
+                            ht: windowSize.windowHeight,
+                            wt: windowSize.windowWidth
                         })
                     }
                 } />

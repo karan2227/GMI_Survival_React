@@ -33,15 +33,15 @@ class Chart extends React.Component {
             yLabel = 'Order Id',
             xTicks=[2,'%'],
             xTickFormat = d3.format('%')
-      
         return (
-            <div className="container-fluid">
-                <ChartLegend />
+            <div className="container-fluid row">
+                <ChartLegend className="col-xs-12" {...this.props}/>
+                
                 <BarStackHorizontalChart
                     data={this.props.data}
                     chartSeries={chartSeries}
-                    width={this.props.w}
-                    height={this.props.h}
+                    width={this.props.w * 0.88}
+                    height={this.props.h * 0.8}
                     xTicks={xTicks}
                     showYGrid= {false}
                     yScale={yScale}
@@ -50,8 +50,8 @@ class Chart extends React.Component {
                     x={x}
                     xTickFormat={xTickFormat}
                     showLegend={false}
-                    />
-                    
+                    className="col-xs-12"/>
+
             </div>
         )
     }

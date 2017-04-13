@@ -7,6 +7,7 @@ class Chart extends React.Component {
     render() {
 
         var legendClassName = "test-legend-class",
+            legendClassNameXS="test-legend-class-xs",
             legendPosition = 'left',
             legendOffset = 90,
             chartSeries = [
@@ -96,7 +97,7 @@ class Chart extends React.Component {
                     <h4 className="pull-left col-xs-6">Order Execution Status</h4>
                     <div className="pull-right col-xs-6">
                         <Legend
-                            legendClassName={legendClassName}
+                            legendClassName={legendClassNameXS}
                             legendPosition={legendPosition}
                             legendOffset={legendOffset}
                             chartSeries={chartSeries}

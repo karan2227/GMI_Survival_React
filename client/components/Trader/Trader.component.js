@@ -8,6 +8,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { WindowResizeListener } from 'react-window-resize-listener';
 import {socketurl,instrumenturl} from '../../appconfig.js';
+import {NotificationContainer, NotificationManager} from 'react-notifications'; 
 
 export default class Trader extends React.Component {
 constructor(props) {
@@ -19,13 +20,31 @@ constructor(props) {
 
     };
 }
-
     componentDidMount() {
-        console.log('did mount trader');
         this.props.getStocks(instrumenturl);
         this.props.getOrders(socketurl);
 
     }
+
+createNotification(type,num) {
+      switch (type) {
+        case 'info':
+          NotificationManager.info('Info message');
+          break;
+        case 'success':
+          NotificationManager.success(num + ' ' + 'ORDERS ADDED', 'SUCCESSFUL');
+          break;
+        case 'warning':
+          NotificationManager.warning('', 'ALL ORDERS DELETED', 3000);
+          break;
+        case 'error':
+          NotificationManager.error('Error message', 'Click me!', 5000, () => {
+            alert('callback');
+          });
+          break;
+      }
+  }; 
+
     _openTable() {
         this.setState({ showContainer: false });
     }
@@ -36,6 +55,7 @@ constructor(props) {
 
     _deleteOrders() {
         this.props.deleteOrder(socketurl);
+        this.createNotification('warning'); 
     }
 
     _createOrder(TraderTextBox) {
@@ -70,6 +90,8 @@ constructor(props) {
             console.log(data);
             this.props.getOrders(socketurl, data);
         }
+         this.createNotification('success',num); 
+
     }
 
     _refreshData() {
@@ -120,6 +142,7 @@ constructor(props) {
                 <Footer />
                 <Websocket url='ws://localhost:8080/socket.io/?transport=websocket'
                     onMessage={this.handleData.bind(this)} />
+                    <NotificationContainer/> 
             </div>
         );
     }

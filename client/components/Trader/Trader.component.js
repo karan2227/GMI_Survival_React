@@ -7,6 +7,7 @@ import Websocket from 'react-websocket';
 import Header from './Header';
 import Footer from './Footer';
 import { WindowResizeListener } from 'react-window-resize-listener';
+import {socketurl,instrumenturl} from '../../appconfig.js';
 
 export default class Trader extends React.Component {
 constructor(props) {
@@ -21,8 +22,8 @@ constructor(props) {
 
     componentDidMount() {
         console.log('did mount trader');
-        this.props.getStocks("http://localhost:8080/instruments");
-        this.props.getOrders("http://localhost:8080/orders");
+        this.props.getStocks(instrumenturl);
+        this.props.getOrders(socketurl);
 
     }
     _openTable() {
@@ -30,18 +31,14 @@ constructor(props) {
     }
 
     _openChart() {
-        console.log("inside open chart")
         this.setState({ showContainer: true });
     }
 
     _deleteOrders() {
-        this.props.deleteOrder("http://localhost:8080/orders");
+        this.props.deleteOrder(socketurl);
     }
 
     _createOrder(TraderTextBox) {
-        // console.log('inside createOrder');
-        // console.log(this.props.stocks);
-        // console.log(ReactDOM.findDOMNode(this.refs.orderNumber).value);
         var num = TraderTextBox;
 
         var side = "";
@@ -71,12 +68,12 @@ constructor(props) {
                 traderId: this.props.currentSelectedUser.id
             }
             console.log(data);
-            this.props.getOrders('http://localhost:8080/orders', data);
+            this.props.getOrders(socketurl, data);
         }
     }
 
     _refreshData() {
-        this.props.getOrders('http://localhost:8080/orders');        
+        this.props.getOrders(socketurl);        
     }
 
     handleData(data) {
@@ -84,7 +81,7 @@ constructor(props) {
         data = JSON.parse(data);
         console.log(data[0], data[1]);
         this.props.updateOrderSocket(data[0], data[1]);
-        this.props.getOrders("http://localhost:8080/orders");
+        this.props.getOrders(socketurl);
     }
 
     render() {
@@ -92,7 +89,6 @@ constructor(props) {
         var chartOrTable;
         if (this.state.showContainer) {
             var chartData = [];
-            //  console.log(this.props,"hgghcvvghkcv");
             for (var obj of this.props.orders) {
                 var quantityExecuted = (obj.quantityExecuted / obj.quantity),
                     quantityPlaced = (obj.quantityPlaced / obj.quantity) - quantityExecuted,

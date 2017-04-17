@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 //all actions which are linked to other components by "team_discussed" series of links
-import { getUsers,selectedUser,getOrders,getStocks,updateOrder,deleteOrder } from '../actions/actions';
+import { getUsers,getOrders,getStocks,deleteOrder } from '../appconfig.js';
+import {updateOrder,selectedUser} from '../actions/actions.js';
+
 
 //Naming convention for all components
 import Main from './Main.component';

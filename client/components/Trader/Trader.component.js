@@ -8,6 +8,8 @@ import Header from './Header';
 import Footer from './Footer';
 import { WindowResizeListener } from 'react-window-resize-listener';
 import {socketurl,instrumenturl} from '../../appconfig.js';
+import {NotificationContainer, NotificationManager} from 'react-notifications'; 
+
 
 export default class Trader extends React.Component {
 constructor(props) {
@@ -26,6 +28,26 @@ constructor(props) {
         this.props.getOrders(socketurl);
 
     }
+
+    createNotification(type,num) {
+      switch (type) {
+        case 'info':
+          NotificationManager.info('Info message');
+          break;
+        case 'success':
+          NotificationManager.success(num + ' ' + 'ORDERS ADDED', 'SUCCESSFUL');
+          break;
+        case 'warning':
+          NotificationManager.warning('', 'ALL ORDERS DELETED', 3000);
+          break;
+        case 'error':
+          NotificationManager.error('Error message', 'Click me!', 5000, () => {
+            alert('callback');
+          });
+          break;
+      }
+  }; 
+
     _openTable() {
         this.setState({ showContainer: false });
     }
@@ -67,9 +89,13 @@ constructor(props) {
                 limitPrice: limitPrice,
                 traderId: this.props.currentSelectedUser.id
             }
-            console.log(data);
+            //console.log(data);
             this.props.getOrders(socketurl, data);
         }
+             this.createNotification('success',num);
+            this.setState({count:num}); 
+                return;
+
     }
 
     _refreshData() {
@@ -85,7 +111,7 @@ constructor(props) {
     }
 
     render() {
-        console.log(this.props.orders, "my check");
+        
         var chartOrTable;
         if (this.state.showContainer) {
             var chartData = [];
@@ -102,7 +128,7 @@ constructor(props) {
             chartOrTable = <Table {...this.props}></Table>
         }
         return (
-            <div>
+            <div className="desktop">
                 < WindowResizeListener onResize = {
                     windowSize => {
                         console.log(windowSize.windowWidth, windowSize.windowWidth)
@@ -114,12 +140,13 @@ constructor(props) {
                 } />
                 <Header createOrder={this._createOrder.bind(this)} deleteOrders={this._deleteOrders.bind(this)} refreshData={this._refreshData.bind(this)} openChart={this._openChart.bind(this)} openTable={this._openTable.bind(this)}{...this.props} />
 
-                <div className="container-fluid">
+                <div className="container-fluid ">
                     {chartOrTable}
                 </div>
                 <Footer />
                 <Websocket url='ws://localhost:8080/socket.io/?transport=websocket'
                     onMessage={this.handleData.bind(this)} />
+                    <NotificationContainer/>
             </div>
         );
     }

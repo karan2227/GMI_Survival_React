@@ -1,19 +1,22 @@
 import React from 'react';
-import {userurl,socketurl} from '../appconfig.js';
+import { userurl, socketurl } from '../appconfig.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class Main extends React.Component{
+class Main extends React.Component {
 
-    componentDidMount(){
-         this.props.getUsers(userurl);
-         this.props.getOrders(socketurl);
+    componentDidMount() {
+        this.props.getUsers(userurl);
+        this.props.getOrders(socketurl);
 
-}
+    }
 
-    render(){
+    render() {
         return (
-        <div>
-            {React.cloneElement(this.props.children,this.props)}
-        </div>)
+            <div>
+                <MuiThemeProvider>
+                    {React.cloneElement(this.props.children, this.props)}
+                </MuiThemeProvider>
+            </div>)
     }
 };
 

@@ -10,17 +10,17 @@ export default class ChartLegend extends React.Component {
                 {
                     field: 'quantityExecuted',
                     name: 'Executed',
-                    color: '#FF8000'
+                    color: '#6b7d93'
                 },
                 {
                     field: 'quantityPlaced',
                     name: 'Placed',
-                    color: '#FEBB68'
+                    color: '#8597ad'
                 },
                 {
                     field: 'quantity',
                     name: 'Total',
-                    color: '#FFEFBF'
+                    color: '#bdcad0'
                 }]
 
         return (

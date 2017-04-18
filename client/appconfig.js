@@ -4,7 +4,7 @@ import axios from 'axios';
 //urls
 export var socketurl="http://localhost:8080/orders";
 export var userurl="http://localhost:8080/users";
-export var instrumenturl="http://localhost:8080/instruments"
+export var instrumenturl="http://localhost:8080/instruments";
 
 //axios 
 export function getUsers(url, data = undefined) {

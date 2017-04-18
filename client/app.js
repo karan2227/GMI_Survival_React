@@ -12,8 +12,10 @@ import Login from './components/Login/Login.component';
 import Chart from './components/Trader/Chart.component';
 import Trader from './components/Trader/Trader.component';
 
+var injectTapEventPlugin=require("react-tap-event-plugin");
 const store = configureStore();
 //here sending empty initialstates
+injectTapEventPlugin();
 render(
     <Provider store={store}>
         <Router history={browserHistory}>

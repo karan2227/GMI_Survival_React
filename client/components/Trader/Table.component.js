@@ -5,7 +5,7 @@ export default class Trader extends React.Component{
     render(){
         return (<div className="row">
             <div className="hidden-xs hidden-sm">
-    <BootstrapTable data={this.props.orders} bordered={false}>
+    <BootstrapTable data={this.props.orders} bordered={true} pagination={true} >
                 <TableHeaderColumn dataField='id' dataAlign="center" isKey={true}  dataSort={ true }>ID</TableHeaderColumn>
                 <TableHeaderColumn dataField='creationTime' dataAlign="center"  dataSort={ true }>Creation Time</TableHeaderColumn>
                 <TableHeaderColumn dataField='side' dataAlign="center"  dataSort={ true }>Side</TableHeaderColumn>
@@ -20,7 +20,7 @@ export default class Trader extends React.Component{
             </BootstrapTable>       
             </div> 
             <div className="hidden-xs hidden-md hidden-lg">
-    <BootstrapTable data={this.props.orders} bordered={false}>
+    <BootstrapTable data={this.props.orders} bordered={true} pagination={true}>
                 <TableHeaderColumn dataField='id' dataAlign="center" isKey={true}  dataSort={ true }>ID</TableHeaderColumn>
                 <TableHeaderColumn dataField='creationTime' dataAlign="center"  dataSort={ true }>Creation Time</TableHeaderColumn>
                 <TableHeaderColumn dataField='side' dataAlign="center"  dataSort={ true }>Side</TableHeaderColumn>
@@ -33,7 +33,7 @@ export default class Trader extends React.Component{
             </BootstrapTable>       
             </div> 
             <div className="hidden-sm hidden-md hidden-lg">
-    <BootstrapTable data={this.props.orders} bordered={false}>
+    <BootstrapTable data={this.props.orders} bordered={true} pagination={true}>
                 <TableHeaderColumn dataField='id' dataAlign="center" isKey={true}  dataSort={ true }>ID</TableHeaderColumn>
                 <TableHeaderColumn dataField='side' dataAlign="center"  dataSort={ true }>Side</TableHeaderColumn>
                 <TableHeaderColumn dataField='symbol' dataAlign="center" >Symbol</TableHeaderColumn>

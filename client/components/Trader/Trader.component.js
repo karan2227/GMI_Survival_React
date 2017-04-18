@@ -105,7 +105,7 @@ createNotification(type,num) {
 
     executeNotification(){
           var length = Object.keys(this.props.orders).length;
-            var x;
+          
               var i,j;
               var flag=true;
               for(i=0;i<length;i++){

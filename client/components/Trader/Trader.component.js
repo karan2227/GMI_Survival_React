@@ -14,6 +14,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 export default class Trader extends React.Component {
 constructor(props) {
     super(props);
+    this.executedList=[];
     this.state = {
         showContainer: false,
         ht: this.props.initialHeight,
@@ -57,6 +58,7 @@ createNotification(type,num) {
     _deleteOrders() {
         this.props.deleteOrder(socketurl);
         this.createNotification('warning'); 
+        this.executedList=[];
     }
 
     _createOrder(TraderTextBox) {
@@ -101,18 +103,36 @@ createNotification(type,num) {
         this.props.getOrders(socketurl);        
     }
 
+    executeNotification(){
+          var length = Object.keys(this.props.orders).length;
+            var x;
+              var i,j;
+              var flag=true;
+              for(i=0;i<length;i++){
+
+                      if(this.props.orders[i].status=='Executed'){
+                          for(j=0;j<this.executedList.length;j++){
+                          if(this.props.orders[i].id==this.executedList[j]){
+                              flag=false;
+                              break;
+                          }
+                        }
+                        if(flag==true){
+                                this.executedList.push(this.props.orders[i].id);
+                                 this.createNotification('info',this.props.orders[i].id);
+                        }
+                      }
+                      flag=true;
+             }
+    }
+
     handleData(data) {
         data = data.substring(2, data.length);
         data = JSON.parse(data);
         console.log(data[0], data[1]);
         this.props.updateOrderSocket(data[0], data[1]);
         this.props.getOrders(socketurl);
-        this.props.orders.map((item,index)=>{
-            if(item.status=='Executed'){
-                this.createNotification('info',item.id);
-            }
-        })
-
+        this.executeNotification();
     }
 
     render() { 

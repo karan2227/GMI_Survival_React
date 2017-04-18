@@ -21,15 +21,13 @@ constructor(props) {
 
     };
 }
-
     componentDidMount() {
-        console.log('did mount trader');
         this.props.getStocks(instrumenturl);
         this.props.getOrders(socketurl);
 
     }
 
-    createNotification(type,num) {
+createNotification(type,num) {
       switch (type) {
         case 'info':
           NotificationManager.info('Info message');
@@ -58,6 +56,7 @@ constructor(props) {
 
     _deleteOrders() {
         this.props.deleteOrder(socketurl);
+        this.createNotification('warning'); 
     }
 
     _createOrder(TraderTextBox) {
@@ -146,7 +145,9 @@ constructor(props) {
                 <Footer />
                 <Websocket url='ws://localhost:8080/socket.io/?transport=websocket'
                     onMessage={this.handleData.bind(this)} />
+                    
                     <NotificationContainer/>
+
             </div>
         );
     }

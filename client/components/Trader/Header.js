@@ -41,9 +41,9 @@ export default class Header extends React.Component {
 
     render() {
         var length = Object.keys(this.props.orders).length;
-        console.log(length,'orders length')
+        
         var n = length-this.numberOfOrders;
-       console.log(n,'orders minified length ')
+       
         
         var menuItem = this.props.orders.map((item,index)=>{
             if(index>=n){

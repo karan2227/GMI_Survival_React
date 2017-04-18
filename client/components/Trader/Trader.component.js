@@ -30,7 +30,7 @@ constructor(props) {
 createNotification(type,num) {
       switch (type) {
         case 'info':
-          NotificationManager.info('Info message');
+          NotificationManager.info('order'+' '+ num + ' ' + 'is executed' );
           break;
         case 'success':
           NotificationManager.success(num + ' ' + 'ORDERS ADDED', 'SUCCESSFUL');
@@ -107,10 +107,15 @@ createNotification(type,num) {
         console.log(data[0], data[1]);
         this.props.updateOrderSocket(data[0], data[1]);
         this.props.getOrders(socketurl);
+        this.props.orders.map((item,index)=>{
+            if(item.status=='Executed'){
+                this.createNotification('info',item.id);
+            }
+        })
+
     }
 
-    render() {
-        
+    render() { 
         var chartOrTable;
         if (this.state.showContainer) {
             var chartData = [];
@@ -124,7 +129,7 @@ createNotification(type,num) {
 
         }
         else {
-            chartOrTable = <Table {...this.props}></Table>
+            chartOrTable = <Table myNotifiaction={this.createNotification.bind(this)} {...this.props}></Table>
         }
         return (
             <div className="desktop">
@@ -137,7 +142,7 @@ createNotification(type,num) {
                         })
                     }
                 } />
-                <Header createOrder={this._createOrder.bind(this)} deleteOrders={this._deleteOrders.bind(this)} refreshData={this._refreshData.bind(this)} openChart={this._openChart.bind(this)} openTable={this._openTable.bind(this)}{...this.props} />
+                <Header createOrder={this._createOrder.bind(this)} deleteOrders={this._deleteOrders.bind(this)} refreshData={this._refreshData.bind(this)} openChart={this._openChart.bind(this)} openTable={this._openTable.bind(this)} {...this.props} />
 
                 <div className="container-fluid ">
                     {chartOrTable}

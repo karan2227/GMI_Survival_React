@@ -42,7 +42,7 @@ export default class Header extends React.Component {
         var n = length - this.numberOfOrders;
         var menuItem = this.props.orders.map((item, index) => {
             if (index >= n) {
-                return (<MenuItem>TRADER-ID :{item.id} |QUANTITY :{item.quantity}<br />SYM :{item.symbol} |STATUS: {item.status}<hr /> </MenuItem>);
+                return (<MenuItem>Trader <b>{item.traderId}</b> has placed {item.quantity} orders<br/> of {item.symbol}. | STATUS: <b>{item.status}</b><hr /> </MenuItem>);
             }
             else { { } }
         })
@@ -57,7 +57,7 @@ export default class Header extends React.Component {
                                     <li className="pull-right signout">
                                         <a href="" onClick={this.props.logoutUser} >Sign Out</a>
                                     </li>
-                                    <li className="pull-right tradername">{firebase.auth().currentUser.displayName}</li>
+                                    <li className="pull-right tradername"><b>{firebase.auth().currentUser.displayName}</b></li>
                                 </ul>
                             </div>
                             <hr>
@@ -99,10 +99,12 @@ export default class Header extends React.Component {
                         </div>
                     </div>
                 </div>
+                
                 <Drawer open={this.state.open} >
-                    <MenuItem onClick={this.handleToggle}><button className="pull-right btn btn-danger btn-sm"> X </button> <b>LATEST ORDERS</b></MenuItem>
+                    <MenuItem onClick={this.handleToggle}><button className="pull-right btn btn-sm drawer-button"> X </button> <b>LATEST ORDERS</b></MenuItem>
                     {menuItem}
                 </Drawer>
+                
             </div>
 
         );

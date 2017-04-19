@@ -54,3 +54,11 @@ export function updateOrder(reply, data) {
         , data
     };
 }
+export function searchOrder(key,search,items) {
+    return {
+        type:"SEARCH_BY_"+search,
+        key,
+        items
+    };
+}
+

@@ -89,3 +89,60 @@ export function selectedUser(state=[],action){
         return state;
     }
 }
+
+
+export function searchitems(state=[],action){
+    let newOrder=[];
+    console.log(action);
+    switch(action.type){
+        case "SEARCH_BY_ID":
+            action.items.map((item,index)=>{
+                if(item.id.toString().indexOf(action.key)!=-1){
+                    newOrder.push(item)
+                }
+            })
+            return newOrder;
+
+        case "SEARCH_BY_SIDE":
+            action.items.map((item,index)=>{
+                if(item.side.toString().indexOf(action.key)!=-1){
+                    newOrder.push(item)
+                }
+            })
+            return newOrder;
+        
+        case "SEARCH_BY_SYMBOL":
+            action.items.map((item,index)=>{
+                if(item.symbol.toString().indexOf(action.key)!=-1){
+                    newOrder.push(item)
+                }
+            })
+            return newOrder;
+        
+        case "SEARCH_BY_QUANTITY":
+            action.items.map((item,index)=>{
+                if(item.quantity.toString().indexOf(action.key)!=-1){
+                    newOrder.push(item)
+                }
+            })
+            return newOrder;
+        
+        case "SEARCH_BY_STATUS":
+            action.items.map((item,index)=>{
+                if(item.status.toString().indexOf(action.key)!=-1){
+                    newOrder.push(item)
+                }
+            })
+            return newOrder;
+        
+        case "SEARCH_BY_TRADER":
+            action.items.map((item,index)=>{
+                if(item.traderId.toString().indexOf(action.key)!=-1){
+                    newOrder.push(item)
+                }
+            })
+            return newOrder;
+            default:
+            return state;
+    }
+}

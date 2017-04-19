@@ -31,6 +31,7 @@
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.13.4",
     "file-loader": "^0.11.1",
+    "firebase": "^3.8.0",
     "image-webpack-loader": "^3.3.0",
     "material-ui": "^0.17.4",
     "materialize-css": "^0.98.1",

@@ -19,7 +19,6 @@ export function dataIsLoading(state = false, action) {
 
 
 export function users(state = [], action){
- 
     switch (action.type) {
         case 'USERS_FETCH_DATA_SUCCESS':
             return action.users;
@@ -28,7 +27,6 @@ export function users(state = [], action){
     }
 }
 export function orders(state=[],action){
-    console.log("Inside reducers orders:"+action.orders);
     switch(action.type){
         case 'ORDERS_FETCH_DATA_SUCCESS':
         var newState = action.orders;
@@ -59,11 +57,6 @@ export function orders(state=[],action){
                 }
             }
         return [...state];
-        // case 'ORDERS_POST_DATA_SUCCESS':
-        // var newState = [];
-        // newState=state;
-        // newState.push(action.orders); 
-        // return newState;
         default:
         return state;
     }
@@ -93,11 +86,10 @@ export function selectedUser(state=[],action){
 
 export function searchitems(state=[],action){
     let newOrder=[];
-    console.log(action);
     switch(action.type){
         case "SEARCH_BY_ID":
             action.items.map((item,index)=>{
-                if(item.id.toString().indexOf(action.key)!=-1){
+                if(item.id.toString().toLowerCase().indexOf(action.key.toLowerCase())!=-1){
                     newOrder.push(item)
                 }
             })
@@ -105,7 +97,7 @@ export function searchitems(state=[],action){
 
         case "SEARCH_BY_SIDE":
             action.items.map((item,index)=>{
-                if(item.side.toString().indexOf(action.key)!=-1){
+                if(item.side.toString().toLowerCase().indexOf(action.key.toLowerCase())!=-1){
                     newOrder.push(item)
                 }
             })
@@ -113,7 +105,7 @@ export function searchitems(state=[],action){
         
         case "SEARCH_BY_SYMBOL":
             action.items.map((item,index)=>{
-                if(item.symbol.toString().indexOf(action.key)!=-1){
+                if(item.symbol.toString().toLowerCase().indexOf(action.key.toLowerCase())!=-1){
                     newOrder.push(item)
                 }
             })
@@ -121,7 +113,7 @@ export function searchitems(state=[],action){
         
         case "SEARCH_BY_QUANTITY":
             action.items.map((item,index)=>{
-                if(item.quantity.toString().indexOf(action.key)!=-1){
+                if(item.quantity.toString().toLowerCase().indexOf(action.key.toLowerCase())!=-1){
                     newOrder.push(item)
                 }
             })
@@ -129,7 +121,7 @@ export function searchitems(state=[],action){
         
         case "SEARCH_BY_STATUS":
             action.items.map((item,index)=>{
-                if(item.status.toString().indexOf(action.key)!=-1){
+                if(item.status.toString().toLowerCase().indexOf(action.key.toLowerCase())!=-1){
                     newOrder.push(item)
                 }
             })
@@ -137,7 +129,7 @@ export function searchitems(state=[],action){
         
         case "SEARCH_BY_TRADER":
             action.items.map((item,index)=>{
-                if(item.traderId.toString().indexOf(action.key)!=-1){
+                if(item.traderId.toString().toLowerCase().indexOf(action.key.toLowerCase())!=-1){
                     newOrder.push(item)
                 }
             })

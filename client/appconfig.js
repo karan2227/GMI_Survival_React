@@ -54,7 +54,6 @@ export function getOrders(url, data) {
         dispatch(dataIsLoading(true));
 
         if (data) {
-            console.log('inside post action');
             return axios({
                 url: url,
                 timeout: 20000,

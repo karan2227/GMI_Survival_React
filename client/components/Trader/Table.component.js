@@ -36,15 +36,15 @@ export default class Trader extends React.Component {
     render() {
 
         let data = this.state.loadOrders ? this.props.orders : this.props.searchitems
-        console.log(data)
-        return (<div className="row">
-            <form className="form-horizontal col-md-4 col-xs-12 col-sm-12 form-color ">
+        
+        return (<div>
+            <form className="form-horizontal col-md-12 col-xs-12 col-sm-12 form-color ">
                
                 <TextField onChange={this.searchOrders.bind(this)}
-                     className=" col-md-6 col-xs-2 col-sm-4 txtfield" id="search"
-                    defaultValue=""
+                     className=" col-md-10 col-xs-2 col-sm-4 txtfield" id="search"
+                    defaultValue="Search"
                 />
-                <DropDownMenu className="col-md-6 col-xs-10 col-sm-8" value={this.state.value} onChange={this.handleSearchChange.bind(this)}>
+                <DropDownMenu className="col-md-2 col-xs-10 col-sm-8" value={this.state.value} onChange={this.handleSearchChange.bind(this)}>
                     <MenuItem value='ID' primaryText="ID" />
                     <MenuItem value='SIDE' primaryText="Side" />
                     <MenuItem value='SYMBOL' primaryText="Symbol" />
@@ -54,9 +54,9 @@ export default class Trader extends React.Component {
                 </DropDownMenu>
                
             </form>
-            
+            <div className="row">
             <div className="hidden-xs hidden-sm">
-                <BootstrapTable data={data} bordered={true} pagination={true} >
+                <BootstrapTable data={data} bordered={false} pagination={true} >
                     <TableHeaderColumn dataField='id' dataAlign="center" isKey={true} dataSort={true}>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='creationTime' dataAlign="center" dataSort={true}>Creation Time</TableHeaderColumn>
                     <TableHeaderColumn dataField='side' dataAlign="center" dataSort={true}>Side</TableHeaderColumn>
@@ -71,7 +71,7 @@ export default class Trader extends React.Component {
                 </BootstrapTable>
             </div>
             <div className="hidden-xs hidden-md hidden-lg">
-                <BootstrapTable data={data} bordered={true} pagination={true}>
+                <BootstrapTable data={data} bordered={false} pagination={true}>
                     <TableHeaderColumn dataField='id' dataAlign="center" isKey={true} dataSort={true}>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='creationTime' dataAlign="center" dataSort={true}>Creation Time</TableHeaderColumn>
                     <TableHeaderColumn dataField='side' dataAlign="center" dataSort={true}>Side</TableHeaderColumn>
@@ -84,7 +84,7 @@ export default class Trader extends React.Component {
                 </BootstrapTable>
             </div>
             <div className="hidden-sm hidden-md hidden-lg">
-                <BootstrapTable data={data} bordered={true} pagination={true}>
+                <BootstrapTable data={data} bordered={false} pagination={true}>
                     <TableHeaderColumn dataField='id' dataAlign="center" isKey={true} dataSort={true}>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='side' dataAlign="center" dataSort={true}>Side</TableHeaderColumn>
                     <TableHeaderColumn dataField='symbol' dataAlign="center" >Symbol</TableHeaderColumn>
@@ -92,6 +92,7 @@ export default class Trader extends React.Component {
                     <TableHeaderColumn dataField='limitPrice' dataAlign="center" dataSort={true}>Limit Price</TableHeaderColumn>
                 </BootstrapTable>
             </div>
+        </div>
         </div>
         )
     }

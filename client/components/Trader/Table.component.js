@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-
+import Paper from 'material-ui/Paper';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 export default class Trader extends React.Component {
@@ -33,16 +33,20 @@ export default class Trader extends React.Component {
         }
         )
     }
+
+    
     render() {
+
 
         let data = this.state.loadOrders ? this.props.orders : this.props.searchitems
         
         return (<div>
-            <form className="form-horizontal col-md-12 col-xs-12 col-sm-12 form-color ">
-               
-                <TextField onChange={this.searchOrders.bind(this)}
+        <Paper>
+            <div className="row">
+            <form className="form-horizontal form-color ">
+                <TextField underlineStyle={{fill: '#a7b6cd'}} onChange={this.searchOrders.bind(this)}
                      className=" col-md-10 col-xs-2 col-sm-4 txtfield" id="search"
-                    defaultValue="Search"
+                    placeholder="Search"
                 />
                 <DropDownMenu className="col-md-2 col-xs-10 col-sm-8" value={this.state.value} onChange={this.handleSearchChange.bind(this)}>
                     <MenuItem value='ID' primaryText="ID" />
@@ -51,9 +55,10 @@ export default class Trader extends React.Component {
                     <MenuItem value='QUANTITY' primaryText="Quantity" />
                     <MenuItem value='STATUS' primaryText="Status" />
                     <MenuItem value='TRADER' primaryText="Trader" />
-                </DropDownMenu>
-               
+                </DropDownMenu>  
             </form>
+            </div>
+            </Paper>
             <div className="row">
             <div className="hidden-xs hidden-sm">
                 <BootstrapTable data={data} bordered={false} pagination={true} >

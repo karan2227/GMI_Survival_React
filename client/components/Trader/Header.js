@@ -42,7 +42,7 @@ export default class Header extends React.Component {
         var n = length - this.numberOfOrders;
         var menuItem = this.props.orders.map((item, index) => {
             if (index >= n) {
-                return (<MenuItem>Trader <b>{item.traderId}</b> has placed <b>{item.quantity}</b> orders<br/> of <b>{item.symbol}</b>. | STATUS: <b>{item.status}</b><hr /> </MenuItem>);
+                return (<MenuItem>Trader <b>{item.traderId}</b> has placed <b>{item.quantity}</b> orders<br/> of <b>{item.symbol}</b>. | STATUS: <b>{item.status}</b><b><hr/></b> </MenuItem>);
             }
             else { { } }
         })
@@ -102,7 +102,7 @@ export default class Header extends React.Component {
                 
                 <Drawer open={this.state.open} className="myDrawer" >
                     <MenuItem onClick={this.handleToggle}><button className="pull-right btn btn-sm basecolor drawer-button"> X </button> <b>LATEST ORDERS</b></MenuItem>
-                    <hr/>
+                   <b> <hr/> </b>
                     {menuItem}
                 </Drawer>
                 

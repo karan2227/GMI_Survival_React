@@ -42,7 +42,7 @@ export default class Trader extends React.Component {
                
                 <TextField onChange={this.searchOrders.bind(this)}
                      className=" col-md-6 col-xs-2 col-sm-4 txtfield" id="search"
-                    defaultValue={this.state.value}
+                    defaultValue=""
                 />
                 <DropDownMenu className="col-md-6 col-xs-10 col-sm-8" value={this.state.value} onChange={this.handleSearchChange.bind(this)}>
                     <MenuItem value='ID' primaryText="ID" />

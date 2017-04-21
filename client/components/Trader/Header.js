@@ -6,23 +6,37 @@ import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
 import * as firebase from 'firebase';
 
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
         this.numberOfOrders = 0;
+        this.myIndex= 1000;
         this.state = {
             open: false,
-            myCount: 0
+            myCount: 0,
+            openDrawer:false
         };
-        this.handleToggle = this.handleToggle.bind(this);
+        this.handleRequestClose=this.handleRequestClose.bind(this);
+        this.handleTouchTap=this.handleTouchTap.bind(this);
+        this.handleToggle=this.handleToggle.bind(this);
+}
+
+    handleToggle(ind){
+        event.preventDefault();
+        event.stopPropagation();
+        this.setState({openDrawer:open});
+        this.myIndex=ind;
     }
 
-    handleToggle() {
-        this.setState({ open: !this.state.open });
-        this.setState({ myCount: 0 });
+    closeDrawer(){
+        this.setState({openDrawer:false});
     }
 
     createHandler() {
@@ -37,15 +51,53 @@ export default class Header extends React.Component {
         ReactDOM.findDOMNode(this.refs.orderNumber).autofocus = true;
     }
 
+     handleTouchTap(event) {
+    // This prevents ghost click.
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget,
+      myCount:0
+      
+    });
+
+    if(this.state.openDrawer){
+        this.setState({openDrawer:false});
+    }
+  };
+
+     handleRequestClose() {
+    this.setState({
+      open: false,
+    });
+  };
+
     render() {
         var length = Object.keys(this.props.orders).length;
         var n = length - this.numberOfOrders;
         var menuItem = this.props.orders.map((item, index) => {
             if (index >= n) {
-                return (<MenuItem>Trader <b>{item.traderId}</b> has placed <b>{item.quantity}</b> orders<br/> of <b>{item.symbol}</b>. | STATUS: <b>{item.status}</b><b><hr/></b> </MenuItem>);
+                return ( <MenuItem onClick={this.handleToggle.bind(this,index)}>Trader: <b>{item.traderId}</b>| SYM: <b>{item.symbol}</b> | STATUS: <b>{item.status}</b> <hr/> </MenuItem>
+                    );
             }
             else { { } }
         })
+        
+        if(this.myIndex!=1000){
+        var drawerDisplay=<div><MenuItem>ID: {this.props.orders[this.myIndex].id}</MenuItem><hr/>
+                        <MenuItem>Creation Time: {this.props.orders[this.myIndex].creationTime}</MenuItem><hr/>
+                        <MenuItem>Side: {this.props.orders[this.myIndex].side}</MenuItem><hr/>
+                        <MenuItem>Symbol: {this.props.orders[this.myIndex].symbol}</MenuItem><hr/>
+                        <MenuItem>Quantity: {this.props.orders[this.myIndex].quantity}</MenuItem><hr/>
+                        <MenuItem>Quantity Placed: {this.props.orders[this.myIndex].quantityPlaced}</MenuItem><hr/>
+                        <MenuItem>Quantity Executed: {this.props.orders[this.myIndex].quantityExecuted}</MenuItem><hr/>
+                        <MenuItem>Limit Price: {this.props.orders[this.myIndex].limitPrice}</MenuItem><hr/>
+                        <MenuItem>Priority: {this.props.orders[this.myIndex].priority}</MenuItem><hr/>
+                        <MenuItem>Status: {this.props.orders[this.myIndex].status}</MenuItem>
+                        </div>
+        }                                                                        
+
         return (
             <div>
                 <div>
@@ -63,14 +115,16 @@ export default class Header extends React.Component {
                             <hr>
                             </hr>
                             <div className="bottom">
-                                <ul className="drop-menu">
-                                    <li> <button type="button" className="btn-sm button1 btn" data-toggle="modal" data-target="#myModal" onClick={this.focus.bind(this)}>Trade</button></li>
-                                    <li> <button type="button" className="btn-sm button2 btn" onClick={this.props.deleteOrders}>Delete All</button></li>
-                                    <li> <button type="button" className="btn-sm button2 btn" onClick={this.props.refreshData}>Refresh</button></li>
+                                <ul className="drop-menu raisedButtonList col-xs-6">
+                                    <li> <RaisedButton label="Trade" primary={false} labelColor='white' backgroundColor='black' data-toggle="modal" data-target="#myModal" onClick={this.focus.bind(this)}/></li>
+                                    <li> <RaisedButton label="Delete" primary={false} labelColor='white' backgroundColor='black' onClick={this.props.deleteOrders}/></li>
+                                    <li> <RaisedButton label="Refresh" primary={false} labelColor='white' backgroundColor='black' onClick={this.props.refreshData}/></li>
+                                    </ul>
+                                    <ul className="drop-menu raisedButtonList2 col-xs-6">
                                     <li className="pull-right "> <button className="icon chart btn btn-sm" id="buttons-right" onClick={this.props.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
                                     <li className="pull-right"> <button className="icon button2 btn btn-sm" id="buttons-right" onClick={this.props.openTable} > <i className="fa fa-table" aria-hidden="true"></i></button></li>
                                     <li className="pull-right">
-                                        <Badge badgeContent={this.state.myCount} secondary={true} badgeStyle={{ top: 10, right: 10 }} onClick={this.handleToggle}>
+                                        <Badge badgeContent={this.state.myCount} secondary={true} badgeStyle={{ top: 10, right: 10 }} onTouchTap={this.handleTouchTap.bind(this)}>
                                             <NotificationsIcon />
                                         </Badge>
                                     </li>
@@ -100,15 +154,32 @@ export default class Header extends React.Component {
                     </div>
                 </div>
                 
-                <Drawer open={this.state.open} className="myDrawer" >
-                    <MenuItem onClick={this.handleToggle}><button className="pull-right btn btn-sm basecolor drawer-button"> X </button> <b>LATEST ORDERS</b></MenuItem>
-                   <b> <hr/> </b>
-                    {menuItem}
-                </Drawer>
                 
+                 <Popover
+                open={this.state.open}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose}
+                animation={PopoverAnimationVertical}>
+
+          <Menu>
+          <MenuItem><center><b>Latest Orders</b></center></MenuItem>
+          <hr/>
+           {menuItem}
+          </Menu>
+        </Popover>
+
+        <Drawer open={this.state.openDrawer}>
+        <MenuItem onClick={this.closeDrawer.bind(this)}> <RaisedButton label="CLOSE" secondary={true} fullWidth={true} /> </MenuItem>
+         {drawerDisplay}
+        </Drawer> 
+
             </div>
 
         );
     }
 
 }
+
+

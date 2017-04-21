@@ -51,7 +51,7 @@ export default class Trader extends React.Component {
     createNotification(type, num) {
         switch (type) {
             case 'info':
-                NotificationManager.info('order' + ' ' + num + ' ' + 'is executed');
+                NotificationManager.info('order' + ' ' + num + ' ' + 'is executed','',1500);
                 break;
             case 'success':
                 NotificationManager.success(num + ' ' + 'ORDERS ADDED', 'SUCCESSFUL');

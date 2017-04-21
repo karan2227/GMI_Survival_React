@@ -157,7 +157,7 @@ export default class Header extends React.Component {
                 onRequestClose={this.handleRequestClose}
                 animation={PopoverAnimationVertical}>
                  <Menu>
-          <MenuItem onClick={this.focus.bind(this)}><center><b>TRADE</b></center></MenuItem>
+          <MenuItem data-toggle="modal" data-target="#myModal" onClick={this.focus.bind(this)}><center><b>TRADE</b></center></MenuItem>
           <MenuItem onClick={this.deleteAllOrders.bind(this)}><center><b>DELETE</b></center></MenuItem>
           <MenuItem onClick={this.props.refreshData}><center><b>REFRESH</b></center></MenuItem>                      
           </Menu>

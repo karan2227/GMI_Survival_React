@@ -38,13 +38,21 @@ module.exports = {
       },
 
       //Image Loader
+      // {
+      //   test: /\.(jpe?g|png|gif|svg)$/i,
+      //   loaders: [
+      //     'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+      //     'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+      //   ]
+      // }
+
+      //url loader
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
-      }
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loaders: [
+                'url-loader?limit=8192'
+            ]
+        }
     ]
   }
 };

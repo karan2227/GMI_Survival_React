@@ -21,16 +21,35 @@ export default class Header extends React.Component {
         this.state = {
             open: false,
             myCount: 0,
-            openDrawer:false
+            openDrawer:false,
+            open2:false
         };
         this.handleRequestClose=this.handleRequestClose.bind(this);
         this.handleTouchTap=this.handleTouchTap.bind(this);
         this.handleToggle=this.handleToggle.bind(this);
 }
 
+    openMenu(event){
+    // This prevents ghost click.
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({
+      open2: true,
+      anchorEl: event.currentTarget,
+      
+    });
+
+    if(this.state.openDrawer){
+        this.setState({openDrawer:false});
+    }
+  };
+
+    deleteAllOrders(){
+        this.myIndex= 1000;
+        this.props.deleteOrders();
+    }
+
     handleToggle(ind){
-        event.preventDefault();
-        event.stopPropagation();
         this.setState({openDrawer:open});
         this.myIndex=ind;
     }
@@ -58,7 +77,6 @@ export default class Header extends React.Component {
     this.setState({
       open: true,
       anchorEl: event.currentTarget,
-      myCount:0
       
     });
 
@@ -70,6 +88,7 @@ export default class Header extends React.Component {
      handleRequestClose() {
     this.setState({
       open: false,
+      open2:false
     });
   };
 
@@ -115,20 +134,34 @@ export default class Header extends React.Component {
                             <hr>
                             </hr>
                             <div className="bottom">
-                                <ul className="drop-menu raisedButtonList col-xs-6">
+                             <RaisedButton label="MENU" fullWidth={false} className="hidden-sm hidden-md hidden-lg col-xs-6 menu" onTouchTap={this.openMenu.bind(this)}/>
+                                <ul className="drop-menu raisedButtonList col-sm-6 hidden-xs">
                                     <li> <RaisedButton label="Trade" primary={false} labelColor='white' backgroundColor='black' data-toggle="modal" data-target="#myModal" onClick={this.focus.bind(this)}/></li>
-                                    <li> <RaisedButton label="Delete" primary={false} labelColor='white' backgroundColor='black' onClick={this.props.deleteOrders}/></li>
+                                    <li> <RaisedButton label="Delete" primary={false} labelColor='white' backgroundColor='black' onClick={this.deleteAllOrders.bind(this)}/></li>
                                     <li> <RaisedButton label="Refresh" primary={false} labelColor='white' backgroundColor='black' onClick={this.props.refreshData}/></li>
                                     </ul>
-                                    <ul className="drop-menu raisedButtonList2 col-xs-6">
+                                    <ul className="drop-menu raisedButtonList2 col-sm-6 col-xs-6">
                                     <li className="pull-right "> <button className="icon chart btn btn-sm" id="buttons-right" onClick={this.props.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
                                     <li className="pull-right"> <button className="icon button2 btn btn-sm" id="buttons-right" onClick={this.props.openTable} > <i className="fa fa-table" aria-hidden="true"></i></button></li>
-                                    <li className="pull-right">
+                                    <li className="pull-right hidden-xs">
                                         <Badge badgeContent={this.state.myCount} secondary={true} badgeStyle={{ top: 10, right: 10 }} onTouchTap={this.handleTouchTap.bind(this)}>
                                             <NotificationsIcon />
                                         </Badge>
                                     </li>
                                 </ul>
+                                <Popover
+                open={this.state.open2}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose}
+                animation={PopoverAnimationVertical}>
+                 <Menu>
+          <MenuItem onClick={this.focus.bind(this)}><center><b>TRADE</b></center></MenuItem>
+          <MenuItem onClick={this.deleteAllOrders.bind(this)}><center><b>DELETE</b></center></MenuItem>
+          <MenuItem onClick={this.props.refreshData}><center><b>REFRESH</b></center></MenuItem>                      
+          </Menu>
+        </Popover>
                             </div>
                         </nav>
                     </header>
@@ -171,7 +204,7 @@ export default class Header extends React.Component {
         </Popover>
 
         <Drawer open={this.state.openDrawer}>
-        <MenuItem onClick={this.closeDrawer.bind(this)}> <RaisedButton label="CLOSE" secondary={true} fullWidth={true} /> </MenuItem>
+        <MenuItem onClick={this.closeDrawer.bind(this)}> <RaisedButton label="CLOSE" labelColor='white' backgroundColor='black' fullWidth={true} /> </MenuItem>
          {drawerDisplay}
         </Drawer> 
 

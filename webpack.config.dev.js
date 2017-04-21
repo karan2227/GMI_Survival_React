@@ -26,10 +26,11 @@ module.exports = {
       },
       // CSS
       {
-        test: /\.styl$/,
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
         include: path.join(__dirname, 'client'),
-        loader: 'style-loader!css-loader!stylus-loader'
-      },
+        exclude: /node_modules/
+      }},
 
       {
         test: /\.css$/,

@@ -1,5 +1,5 @@
 import { render } from 'react-dom';
-import css from './style/common.styl';
+import css from './style/common.css';
 import {route} from './routes.js' 
 
 import App from './components/AppList';

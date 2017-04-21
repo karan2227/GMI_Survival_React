@@ -46,6 +46,7 @@ export default class Header extends React.Component {
 
     deleteAllOrders(){
         this.myIndex= 1000;
+        this.setState({open2:false});
         this.props.deleteOrders();
     }
 
@@ -68,15 +69,17 @@ export default class Header extends React.Component {
 
     focus() {
         ReactDOM.findDOMNode(this.refs.orderNumber).autofocus = true;
+        this.setState({open2:false});
     }
 
      handleTouchTap(event) {
     // This prevents ghost click.
+    this.setState({myCount:0});
     event.preventDefault();
     event.stopPropagation();
     this.setState({
       open: true,
-      anchorEl: event.currentTarget,
+      anchorEl: event.currentTarget
       
     });
 

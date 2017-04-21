@@ -30,10 +30,10 @@ module.exports = {
         loader: 'style-loader!css-loader',
         include: path.join(__dirname, 'client'),
         exclude: /node_modules/
-      }},
+      },
 
       {
-        test: /\.css$/,
+        test: /\.styl$/,
         include: path.join(__dirname, 'client'),
         loader: 'style-loader!css-loader!stylus-loader'
       },

@@ -4,7 +4,6 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: [
-
     './client/app'
   ],
   output: {
@@ -34,10 +33,11 @@ module.exports = {
         include: path.join(__dirname, 'client')
       },
       // CSS
-      {
-        test: /\.styl$/,
+       {
+        test: /\.css$/,
         include: path.join(__dirname, 'client'),
-        loader: 'style-loader!css-loader!stylus-loader'
+        loader: 'style-loader!css-loader',
+        exclude: /node_modules/
       },
 
       //Image Loader
@@ -48,6 +48,7 @@ module.exports = {
       //     'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
       //   ]
       // }
+      
       //url loader
       {
             test: /\.(jpe?g|png|gif|svg)$/i,

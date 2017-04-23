@@ -195,7 +195,7 @@ export default class Trader extends React.Component {
                         {chartOrTable}
                     </div>
                     <Footer />
-                    <Websocket url='ws://localhost:8080/socket.io/?transport=websocket'
+                    <Websocket url='ws://guarded-cove-51655.herokuapp.com/socket.io/?transport=websocket'
                         onMessage={this.handleData.bind(this)} />
 
                     <NotificationContainer />

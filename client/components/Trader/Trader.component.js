@@ -10,7 +10,7 @@ import { WindowResizeListener } from 'react-window-resize-listener';
 import { socketurl, instrumenturl } from '../../appconfig.js';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import * as firebase from 'firebase';
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 
 export default class Trader extends React.Component {
     constructor(props) {
@@ -84,7 +84,7 @@ export default class Trader extends React.Component {
         console.log("inside log out")
         firebase.auth().signOut().then(function () {
             console.log("sign out successful")
-            browserHistory.push("/");
+            hashHistory.push("/");
         })
     }
     _createOrder(TraderTextBox) {
@@ -216,11 +216,10 @@ export default class Trader extends React.Component {
         else  {
             return (<div>
                 <h1>PLEASE LOGIN</h1>
-                <br/>                
+                <br/>
                 <h3>click <Link to="/"><a href="">here</a></Link></h3>
             </div>)
 
         }
     }
 }
-

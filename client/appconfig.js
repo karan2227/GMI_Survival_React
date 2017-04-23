@@ -2,11 +2,11 @@ import { dataIsLoading, dataHasErrored, usersFetchDataSuccess, ordersFetchDataSu
 import axios from 'axios';
 
 //urls
-export var socketurl="http://localhost:8080/orders";
-export var userurl="http://localhost:8080/users";
-export var instrumenturl="http://localhost:8080/instruments";
+export var socketurl="https://guarded-cove-51655.herokuapp.com/orders";
+export var userurl="https://guarded-cove-51655.herokuapp.com/users";
+export var instrumenturl="https://guarded-cove-51655.herokuapp.com/instruments";
 
-//axios 
+//axios
 export function getUsers(url, data = undefined) {
 
     return (dispatch) => {
@@ -150,4 +150,3 @@ export function deleteOrder(url, data = undefined) {
 
     };
 }
-

@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import config from '../../firebase/config';
 import firebase from 'firebase';
-import {browserHistory} from 'react-router';
+import {hashHistory} from 'react-router';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -33,12 +33,12 @@ export default class Login extends React.Component {
         var email = user.id.toLowerCase().concat("@gmail.com");
         var password = email;
 
-        firebase.auth().signInWithEmailAndPassword(email, password) 
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then(function (user) {
                     user.updateProfile({
                     displayName: userName,
                 });
-                browserHistory.push('/trader');
+                hashHistory.push('/trader');
             })
 }
     handleChange(event, index, value) {
@@ -47,7 +47,7 @@ export default class Login extends React.Component {
 
 
     render() {
-        
+
         var showUserList = this.props.users.map((user, index) => {
             return (
                 <MenuItem value={user.id} key={index} primaryText={user.name}></MenuItem>
@@ -59,7 +59,8 @@ export default class Login extends React.Component {
         }
         const style = {
             height: 500,
-            width: 500,
+            width: "40%",
+            width:'squeeze',
             margin: 20,
             textAlign: 'center',
             display: 'inline-block',
@@ -78,11 +79,11 @@ export default class Login extends React.Component {
         }
 
         return (
-            <div className="login container-fluid">
+            <div className="container-fluid">
                 <center>
-                    <Paper style={style} zDepth={10} rounded={true}>
+                    <Paper className="login" style={style} zDepth={10} rounded={true}>
                         <h1><b>LOGIN</b></h1>
-                        <br />                       
+                        <br />
                         {/*<SelectField onChange={this.handleChange.bind(this)} selectedMenuItemStyle={style2} menuItemStyle={style3} labelStyle={style3} ref="selectedUser">*/}
                          <SelectField value={this.state.id} floatingLabelText="UserName" onChange={this.handleChange.bind(this)} selectedMenuItemStyle={style2} menuItemStyle={style3} labelStyle={style3} ref="selectedUser">
                             {showUserList}
@@ -94,10 +95,10 @@ export default class Login extends React.Component {
                             type="password" />
                         <br />
                         <br />
-                       
+
                             {/*<button type="button" value="LOGIN" onClick={this.loginUserLocal.bind(this)} className="btn btn-lg loginbutton">Login</button>*/}
                             <RaisedButton label="Login" primary={true} style={styles} onClick={this.loginUserLocal.bind(this)} />
-                        
+
                         <footer style={style1}>
                             <a href="http://publicis.sapient.com/en-us.html" target="_blank"><img src={require('./Capture.PNG')} height="45" width="30" /></a>
                             <p>Powered By <a href="http://publicis.sapient.com/en-us.html" target="_blank">Sapient</a></p>

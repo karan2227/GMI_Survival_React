@@ -73,7 +73,7 @@ export default class Header extends React.Component {
         this.myIndex=ind;
     }
 
-    closeDrawer(){
+    closeDialogue(){
         this.setState({openDialogue:false,
         open3:false});
     }
@@ -144,7 +144,7 @@ export default class Header extends React.Component {
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.closeDrawer.bind(this)}
+        onTouchTap={this.closeDialogue.bind(this)}
             />
         ];                                                                      
 
@@ -234,11 +234,6 @@ export default class Header extends React.Component {
           </Menu>
         </Popover>
 
-        <Drawer open={this.state.openDrawer} className="hidden-xs">
-        <RaisedButton label="CLOSE" labelColor='white' backgroundColor='#24292E' fullWidth={true} onClick={this.closeDrawer.bind(this)}/>
-         {drawerDisplay}
-        </Drawer> 
-
          <Popover
                 open={this.state.open3}
                 anchorEl={this.state.anchorEl}
@@ -249,13 +244,12 @@ export default class Header extends React.Component {
                 >
 
           <Menu>
-              <RaisedButton label="CLOSE" labelColor='white' backgroundColor='#24292E' fullWidth={true} onClick={this.closeDrawer.bind(this)}/>
+              <RaisedButton label="CLOSE" labelColor='white' backgroundColor='#24292E' fullWidth={true} onClick={this.closeDialogue.bind(this)}/>
           {drawerDisplay}
           </Menu>
         </Popover>
 
         <Dialog
-          title="Dialog With Actions"
           actions={actions}
           modal={true}
           open={this.state.openDialogue}

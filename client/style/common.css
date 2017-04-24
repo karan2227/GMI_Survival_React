@@ -277,7 +277,7 @@ h1{
 }
 
 .menu{
-    margin-top:10px;
+    margin-top:13px;
 }
 
 .modal-footer{
@@ -287,5 +287,10 @@ h1{
     display: inline-block;
     text-align: -webkit-center;
     width: 100%;
-    margin-top: 50%;
+}
+#loginStatus{
+    margin-top: 15%;
+}
+#myModal{
+    margin-top: 10%;
 }

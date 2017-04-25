@@ -116,6 +116,11 @@ export default class Header extends React.Component {
   };
 
     render() {
+        const styles={
+            top: 10, 
+            right: 10,
+           
+        }
         var length = Object.keys(this.props.orders).length;
         var n = length - this.numberOfOrders;
         var menuItem = this.props.orders.map((item, index) => {
@@ -175,7 +180,7 @@ export default class Header extends React.Component {
                                     <li className="pull-right "> <button className="icon chart btn btn-sm" id="buttons-right" onClick={this.props.openChart}> <i className="fa fa-bar-chart" aria-hidden="true"></i></button></li>
                                     <li className="pull-right"> <button className="icon button2 btn btn-sm" id="buttons-right" onClick={this.props.openTable} > <i className="fa fa-table" aria-hidden="true"></i></button></li>
                                     <li className="pull-right">
-                                        <Badge badgeContent={this.state.myCount} secondary={true} badgeStyle={{ top: 10, right: 10 }} onTouchTap={this.handleTouchTap.bind(this)}>
+                                        <Badge badgeContent={this.state.myCount} secondary={true} badgeStyle={styles} onTouchTap={this.handleTouchTap.bind(this)}>
                                             <NotificationsIcon />
                                         </Badge>
                                     </li>

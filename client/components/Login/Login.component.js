@@ -35,7 +35,7 @@ export default class Login extends React.Component {
 
         if (user) {
             this.setState({
-                loginStatus: <div><h3>Pleaase Wait..Logging in</h3><br /><CircularProgress size={80} thickness={5} /></div>
+                loginStatus: <div><h3>Please Wait..Logging in</h3><br /><CircularProgress size={80} thickness={5} /></div>
             })
         } else {
             this.setState({
@@ -62,7 +62,7 @@ export default class Login extends React.Component {
                 hashHistory.push('/trader');
             })
             .catch(() => {
-                //error in aut{hentication
+                //error in authentication
                 this.setState({
                     loginStatus: <div><h3>Authentication Error...</h3><h3>Please Enter Valid Credentials</h3>
                         <div className="modal-footer">
